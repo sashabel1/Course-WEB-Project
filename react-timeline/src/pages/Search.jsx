@@ -59,7 +59,7 @@ useEffect(() => {
           return;
         }
 
-        const searchUrl = new URL('http://localhost:4000/search');
+        const searchUrl = new URL(`${process.env.REACT_APP_API}/search`);
         searchUrl.searchParams.append('q', query);
         searchUrl.searchParams.append('startYear', startYear);
         searchUrl.searchParams.append('endYear', endYear);
@@ -82,7 +82,7 @@ useEffect(() => {
         // Save search to user's history
         if (userId) {
           try {
-            await fetch('http://localhost:4000/api/users/search-history', {
+            await fetch(`${process.env.REACT_APP_API}/api/users/search-history`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ const TimelinePage = () => {
 
     setLoading(true);
 
-    fetch(`http://localhost:4000/api/dataset?topic=${encodeURIComponent(storedTopic)}&type=${encodeURIComponent(storedType)}`)
+    fetch(`${process.env.REACT_APP_API}/api/dataset?topic=${encodeURIComponent(storedTopic)}&type=${encodeURIComponent(storedType)}`)
 
       .then((res) => {
         if (!res.ok) {

@@ -23,7 +23,7 @@ const Profile = () => {
       try {
         if (!userId) return;
         
-        const response = await fetch(`http://localhost:4000/api/users/search-history/${userId}`);
+        const response = await fetch(`${process.env.REACT_APP_API}/api/users/search-history/${userId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch search history');
         }
@@ -64,7 +64,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:4000/api/users/profile/${userId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API}/api/users/profile/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
