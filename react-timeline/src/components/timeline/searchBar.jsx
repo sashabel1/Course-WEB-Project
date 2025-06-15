@@ -16,7 +16,7 @@ function SearchBar({ onSearch }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:4000/api/users/search-history/${userId}`);
+      const response = await fetch(`${process.env.REACT_APP_API}/api/users/search-history/${userId}`);
       if (response.ok) {
         const searchHistory = await response.json();
         const filteredSuggestions = searchHistory.filter(historyTerm => 
