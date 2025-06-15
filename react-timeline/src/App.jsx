@@ -8,7 +8,6 @@ import Profile from './pages/Profile';
 import TimelinePage from './pages/TimelinePage';
 import BubblePage from './pages/bubble';
 import Choose from './pages/choose';
-import { API_BASE_URL } from './config/api';
 
 
 
@@ -18,7 +17,7 @@ function App() {
       const email = localStorage.getItem('userEmail');
       if (email) {
         navigator.sendBeacon(
-          `${API_BASE_URL}/api/users/logout`,
+          'http://localhost:4000/api/users/logout',
           JSON.stringify({ email })
         );
         localStorage.removeItem('userId');

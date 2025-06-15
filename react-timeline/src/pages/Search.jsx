@@ -7,7 +7,6 @@ import SearchBar from '../components/timeline/searchBar';
 import Results from '../components/timeline/Results';
 import Loading from '../components/common/Loading';
 import ErrorBox from '../components/common/ErrorBox';
-import { API_BASE_URL } from '../config/api';
 import '../style/pagestyle/Search.css';
 
 const Search = () => {
@@ -60,12 +59,12 @@ useEffect(() => {
           return;
         }
 
-        const searchParams = new URLSearchParams();
-        searchParams.append('q', query);
-        searchParams.append('startYear', startYear);
-        searchParams.append('endYear', endYear);
+        const searchUrl = new URL('http://localhost:4000/search');
+        searchUrl.searchParams.append('q', query);
+        searchUrl.searchParams.append('startYear', startYear);
+        searchUrl.searchParams.append('endYear', endYear);
         
-        const searchResponse = await fetch(`${API_BASE_URL}/search?${searchParams}`, {
+        const searchResponse = await fetch(searchUrl, {
           headers: { 'user-email': userEmail }
         });
 
@@ -83,7 +82,7 @@ useEffect(() => {
         // Save search to user's history
         if (userId) {
           try {
-            await fetch(`${API_BASE_URL}/api/users/search-history`, {
+            await fetch('http://localhost:4000/api/users/search-history', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

@@ -7,11 +7,6 @@ const LoggedInUser = require('../models/LoggedInUserModel');
 router.post('/register', async (req, res) => {
   try {
     const { email, password } = req.body;
-    
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
-    }
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
@@ -22,19 +17,12 @@ router.post('/register', async (req, res) => {
       password,
       searchHistory: []
     });
-    await user.save();
 
+    await user.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    console.error('Registration error:', error.message);
-    
-    if (error.name === 'MongooseServerSelectionError') {
-      res.status(503).json({ message: 'Database connection failed. Please try again.' });
-    } else if (error.name === 'MongooseTimeoutError') {
-      res.status(503).json({ message: 'Database operation timed out. Please try again.' });
-    } else {
-      res.status(500).json({ message: 'Error registering user' });
-    }
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'Error registering user' });
   }
 });
 
@@ -81,11 +69,6 @@ router.put('/profile/:userId', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
-    }
-
     const user = await User.findOne({ email });
     
     if (!user) {
@@ -104,15 +87,8 @@ router.post('/login', async (req, res) => {
       email: user.email
     });
   } catch (error) {
-    console.error('Login error:', error.message);
-    
-    if (error.name === 'MongooseServerSelectionError') {
-      res.status(503).json({ message: 'Database connection failed. Please try again.' });
-    } else if (error.name === 'MongooseTimeoutError') {
-      res.status(503).json({ message: 'Database operation timed out. Please try again.' });
-    } else {
-      res.status(500).json({ message: 'Error logging in' });
-    }
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Error logging in' });
   }
 });
 
