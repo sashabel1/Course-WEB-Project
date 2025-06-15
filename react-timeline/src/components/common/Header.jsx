@@ -16,7 +16,7 @@ function Header() {
     const email = localStorage.getItem('userEmail');
     console.log('Logging out:', email);
     if (email) {
-      await fetch('http://localhost:4000/api/users/logout', {
+      await fetch(`${process.env.REACT_APP_API}/api/users/logout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
