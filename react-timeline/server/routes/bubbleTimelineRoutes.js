@@ -8,9 +8,20 @@ router.get('/dataset', async (req, res) => {
   const { topic, type } = req.query;
   const collection = mongoose.connection.db.collection('dataset');
 
-  const query = {
-    [type]: { $regex: topic, $options: 'i' } 
-  };
+  let query = {};
+
+  if (type === "Year") {
+    const numericYear = parseInt(topic);
+    if (isNaN(numericYear)) {
+      return res.status(400).json({ message: 'Invalid year' });
+    }
+    query = { Year: numericYear };
+  } else {
+    query = {
+      [type]: { $regex: topic, $options: 'i' }
+    };
+  }
+
 
   console.log('🧪 Query:', query);
 
