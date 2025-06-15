@@ -15,11 +15,11 @@ function App() {
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       const email = localStorage.getItem('userEmail');
-      if (email) {
-        navigator.sendBeacon(
-          'http://localhost:4000/api/users/logout',
-          JSON.stringify({ email })
-        );
+       if (email) {
+        const url = `${process.env.REACT_APP_API}/api/users/logout`;
+        const data = new Blob([JSON.stringify({ email })], { type: 'application/json' });
+        
+        navigator.sendBeacon(url, data);
         localStorage.removeItem('userId');
         localStorage.removeItem('userEmail');
       }
