@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(express.text({ type: '*/*' }));
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/Timeline')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('MongoDB connected successfully');
     // Debug: Check if we can access the searches collection
