@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-import { API_BASE_URL } from '../config/api';
 import '../style/pagestyle/index.css';
 
 const Login = () => {
@@ -26,7 +25,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/users/login`, {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,14 +42,10 @@ const Login = () => {
         // Redirect to search page after successful login
         navigate('/choose');
       } else {
-        if (response.status === 503) {
-          setError('Server is temporarily unavailable. Please try again in a moment.');
-        } else {
-          setError(data.message || 'Login failed');
-        }
+        setError(data.message || 'Login failed');
       }
     } catch (err) {
-      setError('Error connecting to server. Please check your internet connection and try again.');
+      setError('Error connecting to server');
     }
   };
 

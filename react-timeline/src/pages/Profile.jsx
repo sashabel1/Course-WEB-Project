@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-import { API_BASE_URL } from '../config/api';
 import '../style/pagestyle/Profile.css';
 
 const Profile = () => {
@@ -24,7 +23,7 @@ const Profile = () => {
       try {
         if (!userId) return;
         
-        const response = await fetch(`${API_BASE_URL}/api/users/search-history/${userId}`);
+        const response = await fetch(`${process.env.REACT_APP_API}/api/users/search-history/${userId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch search history');
         }
@@ -65,7 +64,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/users/profile/${userId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API}/api/users/profile/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

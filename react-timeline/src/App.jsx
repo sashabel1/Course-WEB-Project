@@ -8,7 +8,6 @@ import Profile from './pages/Profile';
 import TimelinePage from './pages/TimelinePage';
 import BubblePage from './pages/bubble';
 import Choose from './pages/choose';
-import { API_BASE_URL } from './config/api';
 
 
 
@@ -16,11 +15,11 @@ function App() {
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       const email = localStorage.getItem('userEmail');
-      if (email) {
-        navigator.sendBeacon(
-          `${API_BASE_URL}/api/users/logout`,
-          JSON.stringify({ email })
-        );
+       if (email) {
+        const url = `${process.env.REACT_APP_API}/api/users/logout`;
+        const data = new Blob([JSON.stringify({ email })], { type: 'application/json' });
+        
+        navigator.sendBeacon(url, data);
         localStorage.removeItem('userId');
         localStorage.removeItem('userEmail');
       }
