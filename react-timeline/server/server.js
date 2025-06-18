@@ -27,6 +27,7 @@ mongoose.connect(process.env.MONGODB_URI)
 const timelineRoutes = require('./routes/timelineRoutes');
 const userRoutes = require('./routes/userRoutes');
 const bubbleTimelineRoutes = require('./routes/bubbleTimelineRoutes');
+const customTimelineRoutes = require('./routes/customTimelineRoutes');
 
 app.get('/searches', async (req, res) => {
   try {
@@ -42,6 +43,7 @@ app.get('/searches', async (req, res) => {
 app.use('/api/users', userRoutes);
 app.use('/', timelineRoutes);
 app.use('/api', bubbleTimelineRoutes);
+app.use('/api/customtimelines', customTimelineRoutes);
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
