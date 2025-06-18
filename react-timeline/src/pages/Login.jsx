@@ -4,6 +4,7 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import '../style/pagestyle/index.css';
 
+
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const Login = () => {
     password: ''
   });
   const [error, setError] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -23,6 +24,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     try {
       const response = await fetch(`${process.env.REACT_APP_API}/api/users/login`, {
@@ -34,6 +36,7 @@ const Login = () => {
       });
 
       const data = await response.json();
+      setIsLoading(false);
 
       if (response.ok && data.success) {
         // Store user info in localStorage
@@ -45,10 +48,11 @@ const Login = () => {
         setError(data.message || 'Login failed');
       }
     } catch (err) {
+      setIsLoading(false);
       setError('Error connecting to server');
     }
   };
-
+  
   return (
     <div className="login-container">
       <Header />
@@ -78,8 +82,8 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-button">
-            Login
+          <button type="submit" className="submit-button" disabled={isLoading }>
+            {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
         <p className="register-link">
