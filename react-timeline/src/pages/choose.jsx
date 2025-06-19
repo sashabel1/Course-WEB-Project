@@ -15,6 +15,10 @@ const Choose = () => {
     navigate('/bubble');
   };
 
+  const handleCreateTimelineClick = () => {
+    navigate('/custom-timeline'); 
+  };
+
   return (
     <div className="choose-page">
       <Header />
@@ -22,11 +26,14 @@ const Choose = () => {
         <h1 className="app-title">Choose Your Experience</h1>
 
         <div className="arrow-buttons-vertical">
-          <button className="arrow-block up" onClick={handleBubbleClick}>
+          <button className="arrow-block down" onClick={handleBubbleClick}>
             EXPLORE BUBBLES
           </button>
-          <button className="arrow-block down" onClick={handleTimelineClick}>
+          <button className="arrow-block up" onClick={handleTimelineClick}>
             EXPLORE TIMELINE
+          </button>
+          <button className="arrow-block down" onClick={handleCreateTimelineClick}>
+            CREATE YOUR OWN TIMELINE
           </button>
         </div>
       </div>

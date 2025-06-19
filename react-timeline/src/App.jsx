@@ -6,9 +6,9 @@ import Register from './pages/Register';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
 import TimelinePage from './pages/TimelinePage';
-import BubblePage from './pages/bubble';
-import Choose from './pages/choose';
-
+import BubblePage from './pages/Bubble';
+import Choose from './pages/Choose';
+import CustomTimeline from './pages/CustomTimeline';
 
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/timeline" element={<TimelinePage />} />
         <Route path="/bubble" element={<BubblePage />} />
-
+        <Route path="/custom-timeline" element={<CustomTimeline />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

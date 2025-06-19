@@ -3,10 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-import SearchBar from '../components/timeline/searchBar';
-import Results from '../components/timeline/Results';
-import Loading from '../components/common/Loading';
-import ErrorBox from '../components/common/ErrorBox';
+import SearchBar from '../components/searchTimeline/searchBar';
+import Results from '../components/searchTimeline/Results';
 import '../style/pagestyle/Search.css';
 
 const Search = () => {
@@ -120,6 +118,27 @@ useEffect(() => {
     if (filteredImages.length === 0) return [];
     const half = Math.ceil(filteredImages.length / 2);
     return side === 'left' ? filteredImages.slice(0, half) : filteredImages.slice(half);
+  };
+
+  const Loading = ({ query }) => {
+    return (
+      <>
+        <p className="search-query-display">
+          {`Searching for: `}
+          <span className="query-text">{query}</span>
+        </p>
+        <p className="loading-message">Loading timeline...</p>
+      </>
+    );
+  };
+
+  const ErrorBox = ({ error }) => {
+    return (
+      <div className="error-box">
+        <p className="error-title">Error:</p>
+        <p>{error}</p>
+      </div>
+    );
   };
 
   return (

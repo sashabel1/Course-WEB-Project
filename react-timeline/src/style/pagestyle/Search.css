@@ -74,3 +74,33 @@ body {
   }
 
 }
+.loading-message {
+  margin-top: 32px;
+  font-size: 1.5rem;
+  color: #6b7280;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.error-box {
+  margin-top: 32px;
+  padding: 16px;
+  background-color: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #b91c1c;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
