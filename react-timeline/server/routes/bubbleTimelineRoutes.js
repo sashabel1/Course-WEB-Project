@@ -22,9 +22,6 @@ router.get('/dataset', async (req, res) => {
     };
   }
 
-
-  console.log('🧪 Query:', query);
-
   try {
     const results = await collection.find(query).toArray();
     res.json(results);

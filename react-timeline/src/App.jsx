@@ -6,9 +6,9 @@ import Register from './pages/Register';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
 import TimelinePage from './pages/TimelinePage';
-import BubblePage from './pages/bubble';
-import Choose from './pages/choose';
-import CustomTimeline from './pages/customTimeline';
+import BubblePage from './pages/Bubble';
+import Choose from './pages/Choose';
+import CustomTimeline from './pages/CustomTimeline';
 
 
 function App() {
