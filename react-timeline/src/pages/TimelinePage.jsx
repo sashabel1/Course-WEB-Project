@@ -54,9 +54,6 @@ const TimelinePage = () => {
 
   const handleSort = () => setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   const handleColorChange = (e) => setColor(e.target.value);
-  const handleExportPDF = () => {
-    alert("Export to PDF not implemented yet.");
-  };
 
   const sortedTimeline = [...timeline].sort((a, b) => {
     const aDate = new Date(`${a.Month || "January"} ${a.Date || 1}, ${a.Year}`);
@@ -113,9 +110,6 @@ const TimelinePage = () => {
       <div className="button-container">
         <button onClick={handleSort} className="btn">
           {sortOrder === "asc" ? "Past → Future" : "Future → Past"}
-        </button>
-        <button onClick={handleExportPDF} className="btn">
-          Export to PDF
         </button>
         <input
           type="color"
