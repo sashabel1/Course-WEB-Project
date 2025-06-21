@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const port = 4000;
-//import libraries
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.text({ type: '*/*' }));
