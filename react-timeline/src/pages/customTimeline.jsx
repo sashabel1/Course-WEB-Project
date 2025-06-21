@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import TimelineList from '../components/customTimeline/TimelineList';
@@ -6,91 +6,107 @@ import TimelineEditor from '../components/customTimeline/TimelineEditor';
 import NewTimelineEditor from '../components/customTimeline/NewTimelineEditor';
 import '../style/pagestyle/customTimeline.css';
 
-const CustomTimeline = () => {
-  const [events, setEvents] = useState([]);
-  const [newEvent, setNewEvent] = useState({ title: '', date: '', description: '' });
-  const [timelineName, setTimelineName] = useState('');
-  const [timelines, setTimelines] = useState([]);
-  const [selectedTimeline, setSelectedTimeline] = useState(null);
+/**
+ * CustomTimeline Component
+ *
+ * This component allows users to build, edit, and save custom timelines.
+ * Users can add events with a title, date, and description, and either create a new timeline
+ * or update an existing one. All timelines are fetched and saved through a backend API.
+ *
+ * Features:
+ * - Displays a list of user timelines fetched from the server
+ * - Allows selection and editing of an existing timeline
+ * - Enables creation of a new timeline with multiple events
+ * - Uses localStorage to identify the logged-in user by email
+ *
+ * Hooks used:
+ * - useState: Manages local component state (timelines, events, selected timeline, etc.)
+ * - useEffect: Fetches timelines on component mount
+ * - useCallback: Optimizes and memoizes the fetch function to avoid unnecessary re-creations
+ */
 
+const CustomTimeline = () => {
   const userEmail = localStorage.getItem('userEmail');
 
-  useEffect(() => {
-    if (!userEmail) return;
+  const [timelines, setTimelines] = useState([]);
+  const [selectedTimeline, setSelectedTimeline] = useState(null);
+  const [timelineName, setTimelineName] = useState('');
+  const [events, setEvents] = useState([]);
+  const [newEvent, setNewEvent] = useState({ title: '', date: '', description: '' });
 
-    async function fetchTimelines() {
-      try {
-        const res = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/user/${userEmail}`);
-        const data = await res.json();
-        setTimelines(data);
-      } catch (err) {
-        console.error('Failed to fetch timelines:', err);
-      }
+  // Fetch timelines for the user
+  const fetchTimelines = useCallback(async () => {
+    if (!userEmail) return;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/user/${userEmail}`);
+      if (!res.ok) throw new Error('Failed to fetch timelines');
+      const data = await res.json();
+      setTimelines(data);
+    } catch (error) {
+      console.error(error);
     }
-    fetchTimelines();
   }, [userEmail]);
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    fetchTimelines();
+  }, [fetchTimelines]);
+
+  // Handle changes for new event inputs
+  const handleNewEventChange = (e) => {
     const { name, value } = e.target;
-    setNewEvent((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setNewEvent(prev => ({ ...prev, [name]: value }));
   };
 
+  // Add event either to selected timeline or to the new timeline events list
   const handleAddEvent = (e) => {
     e.preventDefault();
     if (!newEvent.title || !newEvent.date) return;
 
     if (selectedTimeline) {
-      const updatedEvents = [...selectedTimeline.events, newEvent];
-      setSelectedTimeline({ ...selectedTimeline, events: updatedEvents });
+      setSelectedTimeline(prev => ({
+        ...prev,
+        events: [...prev.events, newEvent],
+      }));
     } else {
-      setEvents((prev) => [...prev, newEvent]);
+      setEvents(prev => [...prev, newEvent]);
     }
+
     setNewEvent({ title: '', date: '', description: '' });
   };
 
-  const fetchAndSetTimelines = async () => {
-    try {
-      const res = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/user/${userEmail}`);
-      const data = await res.json();
-      setTimelines(data);
-    } catch (err) {
-      console.error('Failed to fetch timelines:', err);
-    }
-  };
-
-  const handleSaveNewTimeline = async () => {
-    if (!timelineName || events.length === 0) {
+  // Save a new timeline
+  const saveNewTimeline = async () => {
+    if (!timelineName.trim() || events.length === 0) {
       alert('Please enter a name and add at least one event.');
       return;
     }
-
     try {
-      const response = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/create`, {
+      const res = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: userEmail, title: timelineName, events }),
+        body: JSON.stringify({ userId: userEmail, title: timelineName.trim(), events }),
       });
-      const data = await response.json();
-      if (response.ok) {
+      const data = await res.json();
+      if (res.ok) {
         alert('Timeline saved successfully!');
         setTimelineName('');
         setEvents([]);
-        await fetchAndSetTimelines();
+        fetchTimelines();
       } else {
         alert('Error saving timeline: ' + data.message);
       }
-    } catch (err) {
-      console.error('Save timeline error:', err);
+    } catch (error) {
+      console.error(error);
       alert('Failed to save timeline');
     }
   };
 
-  const handleSaveExistingTimeline = async () => {
+  // Update an existing timeline
+  const saveExistingTimeline = async () => {
+    if (!selectedTimeline) return;
+
     try {
-      const response = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/${selectedTimeline._id}`, {
+      const res = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/${selectedTimeline._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -98,23 +114,25 @@ const CustomTimeline = () => {
           events: selectedTimeline.events,
         }),
       });
-      const data = await response.json();
-      if (response.ok) {
+      const data = await res.json();
+      if (res.ok) {
         alert('Timeline updated successfully!');
         setSelectedTimeline(null);
-        await fetchAndSetTimelines();
+        fetchTimelines();
       } else {
         alert('Error updating timeline: ' + data.message);
       }
-    } catch (err) {
-      console.error('Save timeline error:', err);
-      alert('Failed to save timeline');
+    } catch (error) {
+      console.error(error);
+      alert('Failed to update timeline');
     }
   };
 
+  // Handle editing timeline name for existing timeline
   const handleEditTimelineName = (e) => {
     if (!selectedTimeline) return;
-    setSelectedTimeline({ ...selectedTimeline, title: e.target.value });
+    const newTitle = e.target.value;
+    setSelectedTimeline(prev => ({ ...prev, title: newTitle }));
   };
 
   return (
@@ -132,8 +150,8 @@ const CustomTimeline = () => {
               newEvent={newEvent}
               onAddEvent={handleAddEvent}
               onEditTimelineName={handleEditTimelineName}
-              onChangeNewEvent={handleChange}
-              onSave={handleSaveExistingTimeline}
+              onChangeNewEvent={handleNewEventChange}
+              onSave={saveExistingTimeline}
               onCancel={() => setSelectedTimeline(null)}
             />
           ) : (
@@ -142,9 +160,9 @@ const CustomTimeline = () => {
               newEvent={newEvent}
               events={events}
               onTimelineNameChange={(e) => setTimelineName(e.target.value)}
-              onChangeNewEvent={handleChange}
+              onChangeNewEvent={handleNewEventChange}
               onAddEvent={handleAddEvent}
-              onSave={handleSaveNewTimeline}
+              onSave={saveNewTimeline}
             />
           )}
         </div>

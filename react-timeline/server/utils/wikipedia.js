@@ -18,7 +18,7 @@ async function fetchWikipediaExtract(query) {
   const isMissing = 'missing' in page;
   const extract = page.extract;
   
-  if ('missing' in page) {
+  if (isMissing) {
     return {
       fullText: `No exact match found on Wikipedia for "${query}".`,
       missing: true
