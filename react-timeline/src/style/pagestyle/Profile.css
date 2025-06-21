@@ -236,6 +236,7 @@ body {
   border-radius: 4px;
   margin-bottom: 0;
   flex-wrap: wrap;
+  margin-bottom: 0.75rem;
 }
 
 .info-item label,
