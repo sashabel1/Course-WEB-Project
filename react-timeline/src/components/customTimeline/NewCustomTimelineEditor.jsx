@@ -1,7 +1,7 @@
 
 import React from 'react';
-import EventForm from './EventForm';
-import TimelineView from './TimelineView';
+import EventForm from './EventMakerCustomTimeLine';
+import TimelineView from './CustomTimelineView';
 
 const NewTimelineEditor = ({
   timelineName,

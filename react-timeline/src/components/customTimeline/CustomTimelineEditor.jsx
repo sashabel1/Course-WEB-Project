@@ -1,6 +1,6 @@
 import React from 'react';
-import EventForm from './EventForm';
-import TimelineView from './TimelineView';
+import EventForm from './EventMakerCustomTimeLine';
+import TimelineView from './CustomTimelineView';
 
 const TimelineEditor = ({
   selectedTimeline,
@@ -22,12 +22,12 @@ const TimelineEditor = ({
       isEditing={true}
     />
     <div className='button-group'>
-    <button type="submit" onClick={onSave} className="general-button">
-      Save Changes
-    </button>
-    <button type="button" onClick={onCancel} className="general-button">
-      Cancel
-    </button>
+      <button type="submit" onClick={onSave} className="general-button">
+        Save Changes
+      </button>
+      <button type="button" onClick={onCancel} className="general-button">
+        Cancel
+      </button>
     </div>
   </>
 );

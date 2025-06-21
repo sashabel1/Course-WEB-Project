@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-import TimelineList from '../components/customTimeline/TimelineList';
-import TimelineEditor from '../components/customTimeline/TimelineEditor';
-import NewTimelineEditor from '../components/customTimeline/NewTimelineEditor';
+import TimelineList from '../components/customTimeline/CustomTimelineList';
+import TimelineEditor from '../components/customTimeline/CustomTimelineEditor';
+import NewTimelineEditor from '../components/customTimeline/NewCustomTimelineEditor';
 import '../style/pagestyle/customTimeline.css';
 
 /**
