@@ -4,6 +4,22 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import '../style/pagestyle/main.css';
 
+/**
+ * Register Component
+ *
+ * This component provides a registration form for new users to create an account.ד
+ * On successful registration, the user is redirected to the login page.
+ *
+ * Features:
+ * - Input validation to ensure passwords match before submitting
+ * - Displays success and error messages
+ * - Navigates to login page after successful registration with a delay
+ *
+ * Hooks used:
+ * - useState: Manages form input values, error, and success states
+ * - useNavigate: Handles navigation to other routes
+ */
+
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
