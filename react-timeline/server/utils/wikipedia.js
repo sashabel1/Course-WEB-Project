@@ -21,12 +21,6 @@ async function fetchWikipediaExtract(query) {
     };
   }
 
-  const extract = page.extract || "";
-  const looksLikeDisambiguation = extract.includes("may refer to") || extract.includes("can refer to");
-  const isTooShort = extract.length < 80;
-
-  const isMissing = looksLikeDisambiguation || isTooShort;
-
   return {
     fullText: extract || `No extract available from Wikipedia for "${query}".`,
     missing: isMissing
