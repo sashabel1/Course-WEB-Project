@@ -1,34 +1,27 @@
 import React, { useState } from 'react';
 import '../../style/componentsStyle/searchBar.css';
+import useSearchHistory from '../../hooks/useSearchHistory';
 
 function SearchBar({ onSearch }) {
+  const userId = localStorage.getItem('userId');
+  const { history: searchHistory } = useSearchHistory(userId);
+
   const [term, setTerm] = useState('');
-  const [startYear, setStartYear] = useState('');
-  const [endYear, setEndYear] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const userId = localStorage.getItem('userId');
+  const [startYear, setStartYear] = useState('');
+  const [endYear, setEndYear] = useState('');
 
-  const fetchSuggestions = async (input) => {
+  const fetchSuggestions = (input) => {
     if (!userId || !input.trim()) {
       setSuggestions([]);
       return;
     }
-
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API}/api/users/search-history/${userId}`);
-      if (response.ok) {
-        const searchHistory = await response.json();
-        const filteredSuggestions = searchHistory.filter(historyTerm => 
-          historyTerm.toLowerCase().startsWith(input.toLowerCase()) &&
-          historyTerm.toLowerCase() !== input.toLowerCase()
-        );
-        setSuggestions(filteredSuggestions);
-      }
-    } catch (err) {
-      console.error('Failed to fetch suggestions:', err);
-      setSuggestions([]);
-    }
+    const filteredSuggestions = searchHistory.filter(historyTerm =>
+      historyTerm.toLowerCase().startsWith(input.toLowerCase()) &&
+      historyTerm.toLowerCase() !== input.toLowerCase()
+    );
+    setSuggestions(filteredSuggestions);
   };
 
   const handleInputChange = (e) => {
@@ -51,7 +44,6 @@ function SearchBar({ onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!term.trim()) return;
-    
     setShowSuggestions(false);
     onSearch({
       query: term.trim(),
@@ -60,53 +52,47 @@ function SearchBar({ onSearch }) {
     });
   };
 
-  const validateYear = (value) => {
-    return value === '' || /^\d{0,4}$/.test(value);
-  };
-
   return (
     <div className="search-container">
-      <form onSubmit={handleSubmit} className="search-bar-form">
+      <form className="search-bar-form" onSubmit={handleSubmit}>
         <div className="search-term">
           <input
             type="text"
-            placeholder="Enter search term"
             value={term}
             onChange={handleInputChange}
-            onFocus={() => term.trim() && setShowSuggestions(true)}
+            placeholder="Search for a topic..."
+            autoComplete="off"
           />
           {showSuggestions && suggestions.length > 0 && (
             <div className="suggestions-scroll">
               <div className="suggestions-inner">
-                {suggestions.map((suggestion, index) => (
-                  <div
-                    key={index}
+                {suggestions.map((suggestion, idx) => (
+                  <span
+                    key={idx}
                     className="suggestion-chip"
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
                     {suggestion}
-                  </div>
+                  </span>
                 ))}
               </div>
             </div>
           )}
         </div>
-
         <div className="year-range">
           <input
             type="text"
-            placeholder="Start Year"
             value={startYear}
-            onChange={(e) => validateYear(e.target.value) && setStartYear(e.target.value)}
+            onChange={e => setStartYear(e.target.value)}
+            placeholder="Start Year"
           />
           <input
             type="text"
-            placeholder="End Year"
             value={endYear}
-            onChange={(e) => validateYear(e.target.value) && setEndYear(e.target.value)}
+            onChange={e => setEndYear(e.target.value)}
+            placeholder="End Year"
           />
         </div>
-
         <button type="submit">Search</button>
       </form>
     </div>

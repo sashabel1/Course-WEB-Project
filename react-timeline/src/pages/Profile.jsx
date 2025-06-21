@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import '../style/pagestyle/Profile.css';
+import useSearchHistory from '../hooks/useSearchHistory';
+
+const API_BASE = process.env.REACT_APP_API || 'http://localhost:5000';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -16,28 +19,17 @@ const Profile = () => {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [searches, setSearches] = useState([]);
+
+  // Use the custom hook
+  const { history: searches, loading: searchesLoading, error: searchesError } = useSearchHistory(userId);
 
   useEffect(() => {
-    const fetchSearches = async () => {
-      try {
-        if (!userId) return;
-        
-        const response = await fetch(`${process.env.REACT_APP_API}/api/users/search-history/${userId}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch search history');
-        }
-        
-        const data = await response.json();
-        setSearches(Array.isArray(data) ? data : []);
-      } catch (err) {
-        console.error('Error fetching searches:', err);
-        setSearches([]);
-      }
-    };
-
-    fetchSearches();
-  }, [userId]);
+    if (!userEmail || !userId) {
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userId');
+      navigate('/login');
+    }
+  }, [userEmail, userId, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +37,6 @@ const Profile = () => {
       ...prev,
       [name]: value
     }));
-    // Clear any previous error/success messages
     setError('');
     setSuccess('');
   };
@@ -55,7 +46,6 @@ const Profile = () => {
     setError('');
     setSuccess('');
 
-    // Validate passwords if being changed
     if (formData.newPassword || formData.confirmPassword) {
       if (formData.newPassword !== formData.confirmPassword) {
         setError('New passwords do not match');
@@ -64,14 +54,14 @@ const Profile = () => {
     }
 
     try {
-        const response = await fetch(`${process.env.REACT_APP_API}/api/users/profile/${userId}`, {
+      const response = await fetch(`${API_BASE}/api/users/profile/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: formData.email,
-          password: formData.newPassword || undefined // Only send if new password provided
+          password: formData.newPassword || undefined
         }),
       });
 
@@ -145,7 +135,6 @@ const Profile = () => {
                 Return to Choose
               </button>
             </div>
-
           </>
         ) : (
           <form onSubmit={handleSubmit} className="edit-form">
@@ -202,7 +191,11 @@ const Profile = () => {
 
         <div className="search-history">
           <h3>Recent Searches ({searches.length})</h3>
-          {searches.length === 0 ? (
+          {searchesLoading ? (
+            <p>Loading...</p>
+          ) : searchesError ? (
+            <p className="error-message">{searchesError}</p>
+          ) : searches.length === 0 ? (
             <p>No searches yet</p>
           ) : (
             <div className="search-list">
