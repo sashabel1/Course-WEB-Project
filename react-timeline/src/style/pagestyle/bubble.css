@@ -1,9 +1,4 @@
-.bubble-page {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  margin: 0;
-}
+
 
 .bubble-container {
   background-color: #F2EFE7;

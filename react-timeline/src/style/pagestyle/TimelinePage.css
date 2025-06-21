@@ -5,12 +5,6 @@ body {
   overflow-x: auto;
 }
 
-.timeline-page {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  margin: 0;
-}
 .app-title {
   text-align: center;
 }

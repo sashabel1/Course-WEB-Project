@@ -1,5 +1,8 @@
-
+.app-container,
 .profile-main-container,
+.timeline-page,
+.bubble-page,
+.login-container,
 .index-container {
     min-height: 100vh;
     display: flex;
@@ -15,52 +18,51 @@
 }
 
 .index-buttons-container {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    justify-content: center;
-    margin: 60px 0;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  margin: 60px 0;
 }
 
+/* Base bubble button styles */
 .index-bubble-button {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0, 106, 113, 0.2); /* default shadow */
 }
 
 .index-bubble-button.primary {
-    border: none;
-    background-color: #006A71;
-    color: white;
-    box-shadow: 0 8px 16px rgba(0, 106, 113, 0.3);
+  border: none;
+  background-color: #006A71;
+  color: white;
+  box-shadow: 0 8px 16px rgba(0, 106, 113, 0.3);
 }
 
 .index-bubble-button.secondary {
-    border: 3px solid #006A71;
-    background-color: transparent;
-    color: #006A71;
-    box-shadow: 0 8px 16px rgba(0, 106, 113, 0.2);
+  border: 3px solid #006A71;
+  background-color: transparent;
+  color: #006A71;
 }
 
+/* Shared hover behavior */
 .index-bubble-button:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 106, 113, 0.4);
 }
 
-.index-bubble-button.primary:hover {
-    box-shadow: 0 12px 24px rgba(0, 106, 113, 0.4);
-}
-
+/* Specific hover overrides */
 .index-bubble-button.secondary:hover {
-    background-color: #006A71;
-    color: white;
-    box-shadow: 0 12px 24px rgba(0, 106, 113, 0.4);
+  background-color: #006A71;
+  color: white;
 }
 
 .index-description {
@@ -73,11 +75,6 @@
 }
 
 /* Login Page Styles */
-.login-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
 
 .form-container {
     flex: 1;
