@@ -1,4 +1,5 @@
 
+.profile-main-container,
 .index-container {
     min-height: 100vh;
     display: flex;
