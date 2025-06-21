@@ -138,9 +138,8 @@ const CustomTimeline = () => {
   return (
     <div className="custom-timeline-page">
       <Header />
-      <h2 className="app-title">Build Your Own Timeline</h2>
-
       <div className="custom-timeline-container">
+        <h2 className="app-title">Build Your Own Timeline</h2>
         <TimelineList timelines={timelines} onSelect={setSelectedTimeline} />
 
         <div className="timeline-editor">

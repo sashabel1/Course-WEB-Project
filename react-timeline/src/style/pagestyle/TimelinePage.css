@@ -1,13 +1,5 @@
 /* TimelinePage.css */
-body {
-  margin: 0;
-  background-color: #F2EFE7;
-  overflow-x: auto;
-}
 
-.app-title {
-  text-align: center;
-}
 
 .timeline-Container{
   position: relative;

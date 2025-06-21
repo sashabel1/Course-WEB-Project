@@ -21,12 +21,14 @@ const TimelineEditor = ({
       onTimelineNameChange={onEditTimelineName}
       isEditing={true}
     />
-    <button onClick={onSave} className="general-button">
+    <div className='button-group'>
+    <button type="submit" onClick={onSave} className="general-button">
       Save Changes
     </button>
-    <button onClick={onCancel} className="general-button">
+    <button type="button" onClick={onCancel} className="general-button">
       Cancel
     </button>
+    </div>
   </>
 );
 

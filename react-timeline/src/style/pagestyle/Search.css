@@ -1,12 +1,5 @@
 
 
-.app-title {
-  font-size: 3rem;
-  font-weight: 800;
-  color: #006A71;
-  margin-bottom: 32px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
 
 .app-content-wrapper {
   display: flex;
