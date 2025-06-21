@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation,useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import SearchBar from '../components/searchTimeline/searchBar';
@@ -8,9 +8,15 @@ import Loading from '../components/searchTimeline/Loading';
 import ErrorBox from '../components/searchTimeline/ErrorBox';
 import '../style/pagestyle/Search.css';
 
+/**
+ * Search page component for timeline application.
+ * Handles search queries, year range, fetches timeline data, and displays results.
+ */
 const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  // State for search query, results, filters, and UI status
   const [query, setQuery] = useState('');
   const [fullText, setFullText] = useState('');
   const [timelineEvents, setTimelineEvents] = useState([]);
@@ -21,9 +27,8 @@ const Search = () => {
   const [endYear, setEndYear] = useState('');
   const userId = localStorage.getItem('userId');
 
-  
-
-useEffect(() => {
+  // Sync state with URL params when location changes
+  useEffect(() => {
     const params = new URLSearchParams(location.search);
     const queryFromUrl = params.get('query');
     const start = params.get('startYear') || '';
@@ -35,8 +40,8 @@ useEffect(() => {
       setEndYear(end);
     }
   }, [location.search]);
-  
-  // Fetch timeline data when query or years change
+
+  // Fetch timeline data when query or year filters change
   useEffect(() => {
     if (!query) {
       setFullText('');
@@ -54,46 +59,47 @@ useEffect(() => {
       setImages([]);
 
       try {
+        // Require user authentication
         const userEmail = localStorage.getItem('userEmail');
         if (!userEmail) {
           navigate('/login');
           return;
         }
 
-        const searchUrl = new URL(`${process.env.REACT_APP_API}/search`);
+        // Build API URL with query and filters
+        const apiBase = process.env.REACT_APP_API;
+        const searchUrl = new URL(`${apiBase}/search`);
         searchUrl.searchParams.append('q', query);
         searchUrl.searchParams.append('startYear', startYear);
         searchUrl.searchParams.append('endYear', endYear);
-        
+
         const searchResponse = await fetch(searchUrl, {
           headers: { 'user-email': userEmail }
         });
 
+        // Redirect to login if unauthorized
         if (searchResponse.status === 401) {
           navigate('/login');
           return;
         }
 
+        // Throw error for other failed responses
         if (!searchResponse.ok) {
           throw new Error('Failed to fetch search results');
         }
 
         const data = await searchResponse.json();
-        
-        // Save search to user's history
+
+        // Save search to user's history if logged in
         if (userId) {
           try {
-            await fetch(`${process.env.REACT_APP_API}/api/users/search-history`, {
+            await fetch(`${apiBase}/api/users/search-history`, {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                userId,
-                query
-              }),
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ userId, query }),
             });
           } catch (historyError) {
+            // Log but don't block UI
             console.error('Failed to save to search history:', historyError);
           }
         }
@@ -102,6 +108,7 @@ useEffect(() => {
         setTimelineEvents(data.timelineEvents || []);
         setImages(data.images || []);
       } catch (err) {
+        // Show error and reset results
         console.error('Fetch error:', err);
         setError(`Failed to load timeline: ${err.message}`);
         setFullText('');
@@ -115,28 +122,37 @@ useEffect(() => {
     fetchTimelineData();
   }, [query, startYear, endYear, navigate, userId]);
 
+  /**
+   * Returns images for the left or right side of the timeline.
+   * @param {'left'|'right'} side
+   */
+  const getSideImages = useCallback(
+    (side) => {
+      const filteredImages = images.filter(img => img && img.src);
+      if (!filteredImages.length) return [];
+      const half = Math.ceil(filteredImages.length / 2);
+      return side === 'left'
+        ? filteredImages.slice(0, half)
+        : filteredImages.slice(half);
+    },
+    [images]
+  );
 
-  const getSideImages = (side) => {
-    const filteredImages = images.filter(img => img && img.src);
-    if (filteredImages.length === 0) return [];
-    const half = Math.ceil(filteredImages.length / 2);
-    return side === 'left' ? filteredImages.slice(0, half) : filteredImages.slice(half);
-  };
-
-  // Handler for SearchBar: update URL, which triggers state sync
-  const handleSearch = ({ query, startYear, endYear }) => {
-    navigate(
-      `/search?query=${encodeURIComponent(query)}&startYear=${encodeURIComponent(startYear)}&endYear=${encodeURIComponent(endYear)}`
-    );
-  };
+  // Update URL with new search params (triggers new search)
+  const handleSearch = useCallback(
+    ({ query: q, startYear: s, endYear: e }) => {
+      navigate(
+        `/search?query=${encodeURIComponent(q)}&startYear=${encodeURIComponent(s)}&endYear=${encodeURIComponent(e)}`
+      );
+    },
+    [navigate]
+  );
 
   return (
     <div className="app-container">
       <Header />
       <h1 className="app-title">Timeline Search</h1>
-
       <SearchBar onSearch={handleSearch} />
-
       {loading && query && <Loading query={query} />}
       {error && <ErrorBox error={error} />}
       {!loading && !error && query && (
