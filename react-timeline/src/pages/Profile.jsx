@@ -88,6 +88,11 @@ const Profile = () => {
     }
   };
 
+  // Handler for clicking a search history item
+  const handleHistorySelect = (term) => {
+    navigate(`/search?query=${encodeURIComponent(term)}`);
+  };
+
   if (!userEmail) {
     return (
       <div className="profile-main-container">
@@ -194,6 +199,7 @@ const Profile = () => {
           searches={searches}
           loading={searchesLoading}
           error={searchesError}
+          onSelect={handleHistorySelect}
         />
       </div>
       <Footer />

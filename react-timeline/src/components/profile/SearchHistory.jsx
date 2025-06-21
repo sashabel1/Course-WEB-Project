@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchHistory = ({ searches, loading, error }) => (
+const SearchHistory = ({ searches, loading, error, onSelect }) => (
   <div className="search-history">
     <h3>Recent Searches ({searches.length})</h3>
     {loading ? (
@@ -12,7 +12,12 @@ const SearchHistory = ({ searches, loading, error }) => (
     ) : (
       <div className="search-list">
         {searches.map((term, index) => (
-          <div key={index} className="search-item">
+          <div
+            key={index}
+            className="search-item"
+            style={{ cursor: 'pointer' }}
+            onClick={() => onSelect && onSelect(term)}
+          >
             <p className="search-term">{term}</p>
           </div>
         ))}
