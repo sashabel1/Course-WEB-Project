@@ -1,4 +1,3 @@
-import { useState } from 'react';
 
 const ProfileView = ({ email, onEdit, onReturn }) => {
   return (
