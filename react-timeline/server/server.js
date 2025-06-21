@@ -1,12 +1,12 @@
-require('dotenv').config();
 
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const app = express();
 const port = 4000;
+//import libraries
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.text({ type: '*/*' }));
@@ -14,36 +14,22 @@ app.use(express.text({ type: '*/*' }));
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
-    console.log('MongoDB connected successfully');
-    // Debug: Check if we can access the searches collection
-    mongoose.connection.db.collection('searches').countDocuments()
-      .then(count => {
-        console.log(`Number of documents in searches collection: ${count}`);
-      });
+    console.log('MongoDB connected successfully'); 
   })
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Use routes
+// Import routes
 const timelineRoutes = require('./routes/timelineRoutes');
 const userRoutes = require('./routes/userRoutes');
 const bubbleTimelineRoutes = require('./routes/bubbleTimelineRoutes');
 const customTimelineRoutes = require('./routes/customTimelineRoutes');
 
-app.get('/searches', async (req, res) => {
-  try {
-    const searches = await mongoose.connection.db.collection('searches').find({}).toArray();
-    console.log('Fetched searches:', searches.length);
-    res.json(searches);
-  } catch (err) {
-    console.error('Error fetching searches:', err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
 app.use('/api/users', userRoutes);
 app.use('/', timelineRoutes);
 app.use('/api', bubbleTimelineRoutes);
 app.use('/api/customtimelines', customTimelineRoutes);
+
+//start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

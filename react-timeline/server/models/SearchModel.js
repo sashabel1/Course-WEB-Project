@@ -11,4 +11,4 @@ const searchSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Search', searchSchema, 'searches'); // Add collection name explicitly
+module.exports = mongoose.model('Search', searchSchema, 'searches'); 
