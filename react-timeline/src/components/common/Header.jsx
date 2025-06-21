@@ -35,9 +35,14 @@ function Header() {
 
   return (
     <header className="header">
-    <div className="header-center">
-        HistoryFlow
-      </div>
+    <div
+      className="header-center"
+      style={{ cursor: 'pointer' }}
+      onClick={() => navigate('/choose')}
+      title="Go to Choose"
+    >
+      HistoryFlow
+    </div>
       <div className="header-left">
         <button 
           onClick={handleProfileClick}
