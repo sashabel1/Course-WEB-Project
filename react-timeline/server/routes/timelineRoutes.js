@@ -3,10 +3,11 @@ const router = express.Router();
 const TimelineModel = require('../models/TimelineModel');
 const { generateTimelineFromGemini } = require('../utils/gemini');
 const { fetchUnsplashImages } = require('../utils/unsplash');
+const { fetchWikipediaExtract } = require('../utils/wikipedia');
 const Search = require('../models/SearchModel');
 const { sortTimelineEvents, extractYear, filterTimelineEventsByYear } = require('../utils/timelineUtils');
 const fetch = require('node-fetch');
-const { fetchWikipediaExtract } = require('../utils/wikipedia');
+
 
 /**
  * @route   GET /search
@@ -68,17 +69,19 @@ router.get('/search', async (req, res) => {
     }
 
     const { fullText, missing } = await fetchWikipediaExtract(query);
+    console.log("fullText:", fullText);
+    console.log("missing:", missing);
     let timelineEvents = [];
     let images = [];
-    if (!missing) {
+    if (missing) {
       console.log("term doesnt found");
       return res.json({
         extract: fullText,
         timelineEvents: [],
         images: [],
-        source: 'wikipedia',
-      });
-    } else {
+        source: 'not found',
+      });}
+      else {
       timelineEvents = await generateTimelineFromGemini(fullText);
       timelineEvents = sortTimelineEvents(timelineEvents);
       timelineEvents = timelineEvents.filter(event => extractYear(event.date) !== null);

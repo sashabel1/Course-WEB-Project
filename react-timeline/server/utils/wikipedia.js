@@ -15,13 +15,23 @@ async function fetchWikipediaExtract(query) {
   const page = Object.values(pages)[0]; 
 
   if ('missing' in page) {
-    return { fullText: `No exact match found on Wikipedia for "${query}".`, missing: true };
+    return {
+      fullText: `No exact match found on Wikipedia for "${query}".`,
+      missing: true
+    };
   }
 
+  const extract = page.extract || "";
+  const looksLikeDisambiguation = extract.includes("may refer to") || extract.includes("can refer to");
+  const isTooShort = extract.length < 80;
+
+  const isMissing = looksLikeDisambiguation || isTooShort;
+
   return {
-    fullText: page.extract || `No extract available from Wikipedia for "${query}".`,
-    missing: false
+    fullText: extract || `No extract available from Wikipedia for "${query}".`,
+    missing: isMissing
   };
 }
 
 module.exports = { fetchWikipediaExtract };
+
