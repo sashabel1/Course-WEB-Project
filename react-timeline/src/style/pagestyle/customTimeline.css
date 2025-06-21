@@ -55,3 +55,12 @@
 .event-details {
   margin-top: 5px;
 }
+
+.timeline-list {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 10px;        
+  list-style: none; 
+  padding: 0;
+  margin-bottom: 20px;
+}
