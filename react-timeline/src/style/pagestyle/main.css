@@ -42,15 +42,18 @@ body {
 
 
 /* Base style for all general buttons */
-.general-button {
+
+.general-button{
   padding: 10px 20px;
   color: white;
+  background: #006A71;
   border-radius: 5px;
   border: none;
   cursor: pointer;
   font-weight: 600;
-  
+  font-size: 16px;
 }
+
 
 
 /* Login button (used on login forms) */
@@ -63,9 +66,8 @@ body {
 }
 
 /* Shared hover effect for register and login buttons */
-#btnRegister:hover,
-#btnLogin:hover {
-  background-color: #004a4f;
+.general-button:hover {
+  background-color: #66ff00;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 106, 113, 0.3);
 }

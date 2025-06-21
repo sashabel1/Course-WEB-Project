@@ -128,7 +128,7 @@ const TimelinePage = () => {
         <h1 className="app-title"> {topic} Timeline </h1>
 
       {/* Controls */}
-      <div className="button-container">
+      <div className="button-group">
         <button onClick={handleSort} className="general-button">
           {sortOrder === "asc" ? "Past → Future" : "Future → Past"}
         </button>
@@ -187,25 +187,27 @@ const TimelinePage = () => {
             <p><strong>Affected Population:</strong> {selectedEvent["Affected Population"]}</p>
             <p><strong>Important Person/Group Responsible:</strong> {selectedEvent["Important Person/Group Responsible"]}</p>
             <p><strong>Outcome:</strong> {selectedEvent.Outcome}</p>
-            <button onClick={() => setSelectedEvent(null)} className="general-button">Close</button>
-            {(selectedEvent.Year || selectedEvent.Month || selectedEvent.Date) && (
-              <a
-                href={generateOnThisDayLink(selectedEvent)}
-                target="_blank"
-                rel="noopener noreferrer"
+            <div className="button-group">
+              <button onClick={() => setSelectedEvent(null)} className="general-button">Close</button>
+              {(selectedEvent.Year || selectedEvent.Month || selectedEvent.Date) && (
+                <a
+                  href={generateOnThisDayLink(selectedEvent)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="general-button"
+                >
+                  View on OnThisDate
+                </a>
+              )}
+              <button
                 className="general-button"
+                onClick={() =>
+                  navigate(`/search?query=${encodeURIComponent(selectedEvent["Name of Incident"])}`)
+                }
               >
-                View on OnThisDate
-              </a>
-            )}
-            <button
-              className="general-button"
-              onClick={() =>
-                navigate(`/search?query=${encodeURIComponent(selectedEvent["Name of Incident"])}`)
-              }
-            >
-              Search for more
-            </button>
+                Search for more
+              </button>
+            </div>
               
           </div>
         </div>
