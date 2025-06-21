@@ -53,10 +53,8 @@ const Login = () => {
       setIsLoading(false);
 
       if (response.ok && data.success) {
-        // Store user info in localStorage
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('userEmail', data.email);
-        // Redirect to search page after successful login
         navigate('/choose');
       } else {
         setError(data.message || 'Login failed');

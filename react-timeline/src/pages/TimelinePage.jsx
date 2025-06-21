@@ -5,6 +5,27 @@ import Footer from "../components/common/Footer";
 import "../style/pagestyle/TimelinePage.css";
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * TimelinePage Component
+ *
+ * Displays a dynamic timeline of historical events based on a selected topic and type.
+ * The topic and type are stored in localStorage and fetched on component mount.
+ *
+ * Features:
+ * - Loads timeline data for a specific topic and type from the backend
+ * - Displays event details in a modal with additional metadata
+ * - Provides external links to 'On This Day' pages based on the event date
+ * - Offers quick navigation to a search page for any event
+ *
+ * Hooks used:
+ * - useState: Manages component state (data, sorting, selection, color)
+ * - useEffect: Triggers data fetching and initialization logic on mount
+ *
+ * External dependencies:
+ * - LocalStorage: Reads topic and type selected from previous page
+ * - Backend API: `/api/dataset` endpoint for timeline data
+ * - onthisday.com: Generates links to external date-based history pages
+ */
 
 const TimelinePage = () => {
   const [topic, setTopic] = useState(null);

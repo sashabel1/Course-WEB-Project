@@ -8,8 +8,28 @@ import useProfileForm from '../hooks/useProfileForm';
 import SearchHistory from '../components/profile/SearchHistory';
 import ProfileView from '../components/profile/ProfileView';
 import ProfileForm from '../components/profile/ProfileForm';
-
 const API_BASE = process.env.REACT_APP_API || 'http://localhost:5000';
+
+/**
+ * Profile Component
+ *
+ * This component manages the user's profile page where users can view and edit
+ * their profile information and see their recent search history.
+ *
+ * Features:
+ * - Redirects to login if user data is missing in localStorage
+ * - Displays profile information or an editable form depending on the edit mode
+ * - Shows success and error messages based on profile updates
+ * - Displays user's search history with clickable items to re-run searches
+ *
+ * Custom Hooks used:
+ * - useProfileForm: Manages form state, input changes, submission, and editing status
+ * - useSearchHistory: Fetches and manages the user's search history from the backend
+ *
+ * Hooks used:
+ * - useEffect: Checks for user login status and redirects if needed
+ * - useNavigate: Handles navigation between routes
+ */
 
 const Profile = () => {
   const navigate = useNavigate();
