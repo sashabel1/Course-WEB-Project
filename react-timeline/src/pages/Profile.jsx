@@ -78,7 +78,7 @@ const Profile = () => {
       <Header />
       <div className="profile-container">
         <div className="profile-header">
-          <h2>My Profile</h2>
+          <h2 className="app-title"> My Profile</h2>
         </div>
 
         {success && <div className="success-message">{success}</div>}

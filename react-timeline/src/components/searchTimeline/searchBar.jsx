@@ -53,7 +53,7 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <div className="search-container">
+    <div className="search-bar">
       <form className="search-bar-form" onSubmit={handleSubmit}>
         <div className="search-term">
           <input

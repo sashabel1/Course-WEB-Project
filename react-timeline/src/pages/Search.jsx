@@ -98,6 +98,7 @@ const Search = () => {
   return (
     <div className="search-page">
       <Header />
+      <div className="search-container">
       <h1 className="app-title">Timeline Search</h1>
       <SearchBar onSearch={handleSearch} initialQuery={query} initialStartYear={startYear} initialEndYear={endYear} />
       {loading && query && <Loading query={query} />}
@@ -113,6 +114,7 @@ const Search = () => {
           getSideImages={getSideImages}
         />
       )}
+      </div>
       <Footer />
     </div>
   );
