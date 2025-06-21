@@ -48,7 +48,7 @@ const BubblePage = () => {
         {["All", "Year", "Events", "Country"].map((type) => (
           <button
             key={type}
-            className={`filter-button ${filterType === type ? "active" : ""}`}
+            className={`btn ${filterType === type ? "active" : ""}`}
             onClick={() => setFilterType(type)}
           >
             {type}
