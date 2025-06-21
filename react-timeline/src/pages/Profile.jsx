@@ -4,6 +4,7 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import '../style/pagestyle/Profile.css';
 import useSearchHistory from '../hooks/useSearchHistory';
+import SearchHistory from '../components/profile/SearchHistory';
 
 const API_BASE = process.env.REACT_APP_API || 'http://localhost:5000';
 
@@ -189,24 +190,11 @@ const Profile = () => {
           </form>
         )}
 
-        <div className="search-history">
-          <h3>Recent Searches ({searches.length})</h3>
-          {searchesLoading ? (
-            <p>Loading...</p>
-          ) : searchesError ? (
-            <p className="error-message">{searchesError}</p>
-          ) : searches.length === 0 ? (
-            <p>No searches yet</p>
-          ) : (
-            <div className="search-list">
-              {searches.map((term, index) => (
-                <div key={index} className="search-item">
-                  <p className="search-term">{term}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+         <SearchHistory
+          searches={searches}
+          loading={searchesLoading}
+          error={searchesError}
+        />
       </div>
       <Footer />
     </div>
