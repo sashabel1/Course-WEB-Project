@@ -30,7 +30,7 @@ const EventSchema = new mongoose.Schema({
 
 const TimelineSchema = new mongoose.Schema({
   userId: String,
-  timelineName: String,
+  title: String,
   events: [EventSchema]
 });
 

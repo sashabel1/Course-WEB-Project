@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
  * @param {string} query - Search term.
  * @returns {Promise<{fullText: string, missing: boolean}>} - Extract text and a flag if page is missing.
  */
+
 async function fetchWikipediaExtract(query) {
   const url = `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&titles=${encodeURIComponent(query)}&explaintext=1&redirects=1`;
 

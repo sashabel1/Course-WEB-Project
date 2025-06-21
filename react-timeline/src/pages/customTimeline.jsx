@@ -45,8 +45,8 @@ const CustomTimeline = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userEmail,
-          name: timelineName,
+          userId: userEmail,       
+          title: timelineName,      
           events,
         }),
       });

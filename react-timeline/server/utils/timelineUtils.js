@@ -4,6 +4,7 @@
  * @param {Array} events - Array of timeline event objects, each with a 'date' string.
  * @returns {Array} Sorted array of events by year.
  */
+
 function sortTimelineEvents(events) {
   return events.sort((a, b) => {
     const yearA = extractYear(a.date);
@@ -22,6 +23,7 @@ function sortTimelineEvents(events) {
  * @param {string} dateStr - Date string to extract year from (e.g., "500 BC", "1999").
  * @returns {number|null} Year as integer (negative for BC), or null if invalid.
  */
+
 function extractYear(dateStr) {
   if (!dateStr) return null;
   const bcMatch = dateStr.match(/(?:[A-Za-z]+\s)?(\d{1,4})\s*BC/i);
@@ -39,6 +41,7 @@ function extractYear(dateStr) {
  * @param {number} endYear - End year of the filter range (inclusive).
  * @returns {Array} Filtered array of events within the specified year range.
  */
+
 function filterTimelineEventsByYear(events, startYear, endYear) {
   return events.filter(event => {
     const year = extractYear(event.date);
