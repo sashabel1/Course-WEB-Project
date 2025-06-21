@@ -42,7 +42,7 @@ function Header() {
         if (isLoggedIn) {
           navigate('/choose');
         } else {
-          navigate('/login');
+          navigate('/');
         }
       }}
       title="Go to Choose"
