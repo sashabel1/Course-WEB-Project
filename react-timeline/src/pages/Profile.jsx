@@ -40,7 +40,7 @@ const Profile = () => {
 
   if (!userEmail) {
     return (
-      <div className="profile-main-container">
+      <div className="profile-main-page">
         <Header />
         <div className="profile-container">
           <div className="error-message">
@@ -54,7 +54,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile-main-container">
+    <div className="profile-main-page">
       <Header />
       <div className="profile-container">
         <div className="profile-header">

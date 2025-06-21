@@ -80,7 +80,8 @@ const BubblePage = () => {
         {FILTER_OPTIONS.map((type) => (
           <button
             key={type}
-            className={`btn`}
+            type="button"
+            className={`general-button`}
             onClick={() => setFilterType(type)}
           >
             {type}
@@ -95,6 +96,7 @@ const BubblePage = () => {
           return (
             <button
               key={idx}
+              type="button"
               className="bubble"
               data-x={x}
               data-y={y}

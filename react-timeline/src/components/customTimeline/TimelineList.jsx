@@ -9,7 +9,7 @@ const TimelineList = ({ timelines, onSelect }) => (
       <ul>
         {timelines.map((tl) => (
           <li key={tl._id}>
-            <button className="btn" onClick={() => onSelect(tl)}>
+            <button className="general-button" onClick={() => onSelect(tl)}>
               {tl.title}
             </button>
           </li>

@@ -26,7 +26,7 @@ const Index = () => {
   const goToRegister = () => navigate('/register');
 
   return (
-    <div className="index-container">
+    <div className="index-page">
       <Header />
       <main className="index-content">
         <h1 className="app-title">Welcome to HistoryFlow</h1>

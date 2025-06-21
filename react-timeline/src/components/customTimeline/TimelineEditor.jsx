@@ -21,10 +21,10 @@ const TimelineEditor = ({
       onTimelineNameChange={onEditTimelineName}
       isEditing={true}
     />
-    <button onClick={onSave} className="btn">
+    <button onClick={onSave} className="general-button">
       Save Changes
     </button>
-    <button onClick={onCancel} className="btn">
+    <button onClick={onCancel} className="general-button">
       Cancel
     </button>
   </>

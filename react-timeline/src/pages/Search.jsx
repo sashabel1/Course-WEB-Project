@@ -149,7 +149,7 @@ const Search = () => {
   );
 
   return (
-    <div className="app-container">
+    <div className="search-page">
       <Header />
       <h1 className="app-title">Timeline Search</h1>
       <SearchBar onSearch={handleSearch} />

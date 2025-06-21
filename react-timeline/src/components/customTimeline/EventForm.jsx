@@ -33,7 +33,7 @@ const EventForm = ({ eventData, onChange, onSubmit, timelineName, onTimelineName
       value={eventData.description}
       onChange={onChange}
     />
-    <button type="submit" className="btn">
+    <button type="submit" className="general-button">
       Add Event
     </button>
   </form>

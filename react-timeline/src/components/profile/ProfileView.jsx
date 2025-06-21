@@ -9,9 +9,9 @@ const ProfileView = ({ email, onEdit, onReturn }) => {
         </div>
       </div>
 
-      <div className="button-row">
-        <button onClick={onEdit} className="edit-button">Edit Profile</button>
-        <button onClick={onReturn} className="return-button">Return to Choose</button>
+      <div className="button-group">
+        <button onClick={onEdit} className="general-button">Edit Profile</button>
+        <button onClick={onReturn} className="general-button">Return to Choose</button>
       </div>
     </>
   );

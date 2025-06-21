@@ -21,7 +21,7 @@ const NewTimelineEditor = ({
       onTimelineNameChange={onTimelineNameChange}
       isEditing={false}
     />
-    <button onClick={onSave} className="btn">
+    <button onClick={onSave} className="general-button">
       Save Timeline
     </button>
     <TimelineView events={events} />

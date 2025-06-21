@@ -13,8 +13,8 @@ const ProfileForm = ({ formData, handleInputChange, handleSubmit, cancelEdit }) 
       <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} />
     </div>
     <div className="button-group">
-      <button type="submit" className="save-button">Save Changes</button>
-      <button type="button" onClick={cancelEdit} className="cancel-button">Cancel</button>
+      <button type="submit" id="btnSave" className="general-button">Save Changes</button>
+      <button type="button" id="btnCancel"onClick={cancelEdit} className="general-button">Cancel</button>
     </div>
   </form>
 );

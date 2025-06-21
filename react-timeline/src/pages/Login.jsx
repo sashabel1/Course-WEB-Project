@@ -68,7 +68,7 @@ const Login = () => {
   };
   
   return (
-    <div className="login-container">
+    <div className="login-page">
       <Header />
       <div className="form-container">
         <h2>Login to Your Account</h2>
@@ -96,8 +96,8 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-button" disabled={isLoading }>
-            {isLoading ? 'Logging in...' : 'Login'}
+          <button id="btnLogin" type="submit" className="general-button" disabled={isLoading }>
+            {isLoading ? 'Logging in...' : 'Log In'}
           </button>
         </form>
         <p className="register-link">

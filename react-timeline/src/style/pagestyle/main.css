@@ -1,13 +1,24 @@
-.app-container,
-.profile-main-container,
-.timeline-page,
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F2EFE7;
+  overflow-x: auto; 
+}
+
 .bubble-page,
-.login-container,
-.index-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.choose-page,
+.search-page,
+.profile-main-page,
+.timeline-page,
+.login-page,
+.register-page,
+.custom-timeline-page,
+.index-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    
 }
 
 .index-content {
@@ -25,45 +36,93 @@
   margin: 60px 0;
 }
 
-/* Base bubble button styles */
+/* =========================
+   BUTTON STYLES (GLOBAL)
+   ========================= */
+
+
+/* Base style for all general buttons */
+.general-button {
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  
+}
+
+
+/* Login button (used on login forms) */
+#btnRegister,
+#btnLogin {
+  width: 100%;
+  background-color: #2196F3;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Shared hover effect for register and login buttons */
+#btnRegister:hover,
+#btnLogin:hover {
+  background-color: #004a4f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 106, 113, 0.3);
+}
+
+/* =========================
+   SPECIAL BUTTONS (INDEX PAGE)
+   ========================= */
+
+/* Bubble button base style */
 .index-bubble-button {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   font-size: 24px;
   font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 16px rgba(0, 106, 113, 0.2); /* default shadow */
+  box-shadow: 0 8px 16px rgba(0, 106, 113, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+/* Primary bubble button */
 .index-bubble-button.primary {
-  border: none;
   background-color: #006A71;
   color: white;
   box-shadow: 0 8px 16px rgba(0, 106, 113, 0.3);
 }
 
+/* Secondary bubble button */
 .index-bubble-button.secondary {
   border: 3px solid #006A71;
   background-color: transparent;
   color: #006A71;
 }
 
-/* Shared hover behavior */
+/* Shared hover for bubble buttons */
 .index-bubble-button:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 106, 113, 0.4);
 }
 
-/* Specific hover overrides */
+/* Secondary bubble button hover override */
 .index-bubble-button.secondary:hover {
   background-color: #006A71;
   color: white;
 }
+/* when hoveing will become the color of the background and the border will be green */
+.index-bubble-button.primary:hover {
+    background-color: #F2EFE7;
+    color: #006A71;
+    border: #006A71 3px solid;
+    }
+
+/* =========================
+   END BUTTON STYLES
+   ========================= */
 
 .index-description {
     text-align: center;
@@ -92,51 +151,6 @@
     margin-bottom: 2rem;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    color: #006A71;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #006A71;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #004a4f;
-    box-shadow: 0 0 5px rgba(0, 106, 113, 0.2);
-}
-
-.submit-button {
-    width: 100%;
-    padding: 1rem;
-    background-color: #006A71;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.submit-button:hover {
-    background-color: #004a4f;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 106, 113, 0.3);
-}
-
 .error-message {
     background-color: #ffebee;
     color: #c62828;
@@ -163,48 +177,4 @@
     color: #006A71;
 }
 
-.profile-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.button-group {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.edit-button, .submit-button, .cancel-button {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.edit-button {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.submit-button {
-  background-color: #2196F3;
-  color: white;
-}
-
-.cancel-button {
-  background-color: #f44336;
-  color: white;
-}
-
-.success-message {
-  color: #4CAF50;
-  background-color: #e8f5e9;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  text-align: center;
-}
 

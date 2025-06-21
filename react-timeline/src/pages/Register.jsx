@@ -59,7 +59,7 @@ const Register = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className="register-page">
       <Header />
       <div className="form-container">
         <h2>Create an Account</h2>
@@ -99,7 +99,7 @@ const Register = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-button">
+          <button id="btnRegister" type="submit" className="general-button">
             Register
           </button>
         </form>

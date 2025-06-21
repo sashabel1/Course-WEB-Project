@@ -93,7 +93,7 @@ function SearchBar({ onSearch }) {
             placeholder="End Year"
           />
         </div>
-        <button type="submit">Search</button>
+        <button type="submit" className="general-button">Search</button>
       </form>
     </div>
   );

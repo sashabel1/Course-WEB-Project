@@ -108,7 +108,7 @@ const TimelinePage = () => {
 
       {/* Controls */}
       <div className="button-container">
-        <button onClick={handleSort} className="btn">
+        <button onClick={handleSort} className="general-button">
           {sortOrder === "asc" ? "Past → Future" : "Future → Past"}
         </button>
         <input
@@ -166,19 +166,19 @@ const TimelinePage = () => {
             <p><strong>Affected Population:</strong> {selectedEvent["Affected Population"]}</p>
             <p><strong>Important Person/Group Responsible:</strong> {selectedEvent["Important Person/Group Responsible"]}</p>
             <p><strong>Outcome:</strong> {selectedEvent.Outcome}</p>
-            <button onClick={() => setSelectedEvent(null)} className="btn">Close</button>
+            <button onClick={() => setSelectedEvent(null)} className="general-button">Close</button>
             {(selectedEvent.Year || selectedEvent.Month || selectedEvent.Date) && (
               <a
                 href={generateOnThisDayLink(selectedEvent)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn no-underline"
+                className="general-button"
               >
                 View on OnThisDate
               </a>
             )}
             <button
-              className="btn"
+              className="general-button"
               onClick={() =>
                 navigate(`/search?query=${encodeURIComponent(selectedEvent["Name of Incident"])}`)
               }
