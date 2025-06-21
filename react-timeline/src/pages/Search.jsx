@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import SearchBar from '../components/searchTimeline/searchBar';
 import Results from '../components/searchTimeline/Results';
+import Loading from '../components/searchTimeline/Loading';
+import ErrorBox from '../components/searchTimeline/ErrorBox';
 import '../style/pagestyle/Search.css';
 
 const Search = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [query, setQuery] = useState('');
   const [fullText, setFullText] = useState('');
   const [timelineEvents, setTimelineEvents] = useState([]);
@@ -19,7 +21,7 @@ const Search = () => {
   const [endYear, setEndYear] = useState('');
   const userId = localStorage.getItem('userId');
 
-  const location = useLocation();
+  
 
 useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -34,6 +36,7 @@ useEffect(() => {
     }
   }, [location.search]);
   
+  // Fetch timeline data when query or years change
   useEffect(() => {
     if (!query) {
       setFullText('');
@@ -120,24 +123,10 @@ useEffect(() => {
     return side === 'left' ? filteredImages.slice(0, half) : filteredImages.slice(half);
   };
 
-  const Loading = ({ query }) => {
-    return (
-      <>
-        <p className="search-query-display">
-          {`Searching for: `}
-          <span className="query-text">{query}</span>
-        </p>
-        <p className="loading-message">Loading timeline...</p>
-      </>
-    );
-  };
-
-  const ErrorBox = ({ error }) => {
-    return (
-      <div className="error-box">
-        <p className="error-title">Error:</p>
-        <p>{error}</p>
-      </div>
+  // Handler for SearchBar: update URL, which triggers state sync
+  const handleSearch = ({ query, startYear, endYear }) => {
+    navigate(
+      `/search?query=${encodeURIComponent(query)}&startYear=${encodeURIComponent(startYear)}&endYear=${encodeURIComponent(endYear)}`
     );
   };
 
@@ -146,13 +135,7 @@ useEffect(() => {
       <Header />
       <h1 className="app-title">Timeline Search</h1>
 
-      <SearchBar 
-        onSearch={({ query, startYear, endYear }) => {
-          setQuery(query);
-          setStartYear(startYear);
-          setEndYear(endYear);
-        }}
-      />
+      <SearchBar onSearch={handleSearch} />
 
       {loading && query && <Loading query={query} />}
       {error && <ErrorBox error={error} />}
