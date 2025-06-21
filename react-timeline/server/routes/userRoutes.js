@@ -91,7 +91,10 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    await LoggedInUser.create({ email });
+    const alreadyLoggedIn = await LoggedInUser.findOne({ email });
+    if (!alreadyLoggedIn) {
+      await LoggedInUser.create({ email });
+    }
 
     res.json({
       success: true,

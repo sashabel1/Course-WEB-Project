@@ -16,14 +16,16 @@ function App() {
     const handleBeforeUnload = (event) => {
       const email = localStorage.getItem('userEmail');
        if (email) {
-        const url = `${process.env.REACT_APP_API}/api/users/logout`;
-        const data = new Blob([JSON.stringify({ email })], { type: 'application/json' });
-        
-        navigator.sendBeacon(url, data);
-        localStorage.removeItem('userId');
-        localStorage.removeItem('userEmail');
-      }
-    };
+        fetch(`${process.env.REACT_APP_API}/api/users/logout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+        keepalive: true, 
+      });
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userEmail');
+    }
+  };
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, []);
