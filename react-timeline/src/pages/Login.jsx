@@ -4,6 +4,20 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import '../style/pagestyle/index.css';
 
+/**
+ * Login Component
+ *
+ * This component is a login form that lets users enter email and password to authenticate.
+ * On success, it saves user data to localStorage and redirects to the choose page.
+ *
+ * Features:
+ * - Displays error messages on failed login or server connection issues
+ * - Navigates to registration page via a clickable link for new users
+ *
+ * Hooks used:
+ * - useState: Manages form inputs, loading state, and error messages
+ * - useNavigate: Programmatic navigation on login success or link click
+ */
 
 const Login = () => {
   const navigate = useNavigate();
