@@ -35,9 +35,20 @@ function Header() {
 
   return (
     <header className="header">
-    <div className="header-center">
-        HistoryFlow
-      </div>
+    <div
+      className="header-center"
+      style={{ cursor: 'pointer' }}
+      onClick={() => {
+        if (isLoggedIn) {
+          navigate('/choose');
+        } else {
+          navigate('/');
+        }
+      }}
+      title="Go to Choose"
+    >
+      HistoryFlow
+    </div>
       <div className="header-left">
         <button 
           onClick={handleProfileClick}
