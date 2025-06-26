@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
-import "../style/pagestyle/TimelinePage.css";
 import { useNavigate } from 'react-router-dom';
 
 /**
@@ -121,15 +120,20 @@ const TimelinePage = () => {
 
 
   return (
-    <div className="timeline-page">
-      <Header /> 
-      <div className="timeline-Container" > 
-      <div class="container-wrapper"></div> 
-        <h1 className="app-title"> {topic} Timeline </h1>
+  <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
+    <Header />
+    <div className="relative w-full rounded-2xl flex-1 px-4 mt-8">
+      <div className=""></div>
+      <h1 className="text-5xl font-extrabold text-[#006A71] mb-8 text-center drop-shadow-md">
+        {topic} Timeline
+      </h1>
 
       {/* Controls */}
-      <div className="button-group">
-        <button onClick={handleSort} className="general-button">
+      <div className="flex items-center justify-center gap-4 mb-4">
+        <button
+          onClick={handleSort}
+          className="px-5 py-2 text-white bg-[#006A71] rounded-md border-none cursor-pointer font-semibold text-base hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md transition"
+        >
           {sortOrder === "asc" ? "Past → Future" : "Future → Past"}
         </button>
         <input
@@ -138,29 +142,28 @@ const TimelinePage = () => {
           onChange={handleColorChange}
           title="Pick timeline color"
         />
-        
       </div>
 
       {/* Timeline */}
       {loading ? (
         <div className="text-center">Loading...</div>
       ) : (
-        <div className="timeline-horizontal">
+        <div className="flex overflow-x-auto py-4 px-4 gap-4 scroll-smooth">
           {sortedTimeline.map((event, idx) => (
             <div
               key={idx}
-              className="timeline-card"
+              className="min-w-[200px] border-2 rounded-xl p-4 bg-white cursor-pointer transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl flex-shrink-0"
               style={{ borderColor: color }}
               onClick={() => setSelectedEvent(event)}
             >
-              <div className="timeline-date">{[
-                  event.Month,
-                  event.Year
-                ]
+              <div className="font-bold mb-2 text-[#555]">
+                {[event.Month, event.Year]
                   .filter(val => val !== "Unknown" && val !== "לא ידוע")
                   .join(" ")}
               </div>
-              <div className="timeline-title">{event["Name of Incident"]}</div>
+              <div className="text-lg font-semibold text-[#371f1f]">
+                {event["Name of Incident"]}
+              </div>
             </div>
           ))}
         </div>
@@ -168,16 +171,17 @@ const TimelinePage = () => {
 
       {/* Modal */}
       {selectedEvent && (
-        <div className="timeline-modal" onClick={() => setSelectedEvent(null)}>
-          <div className="timeline-modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{selectedEvent["Name of Incident"]}</h2>
-            <p>
-              <strong>Date:</strong>{" "}
-              {[
-                selectedEvent.Date,
-                selectedEvent.Month,
-                selectedEvent.Year
-              ]
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex justify-center items-center z-[1000]"
+          onClick={() => setSelectedEvent(null)}
+        >
+          <div
+            className="bg-[#F2EFE7] rounded-xl border-4 border-[#006A71] p-4 w-[90%] max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-2xl mb-4 text-[#0e868f]">{selectedEvent["Name of Incident"]}</h2>
+            <p><strong>Date:</strong>{" "}
+              {[selectedEvent.Date, selectedEvent.Month, selectedEvent.Year]
                 .filter(val => val !== "Unknown")
                 .join(" ") || "Unknown"}
             </p>
@@ -187,20 +191,26 @@ const TimelinePage = () => {
             <p><strong>Affected Population:</strong> {selectedEvent["Affected Population"]}</p>
             <p><strong>Important Person/Group Responsible:</strong> {selectedEvent["Important Person/Group Responsible"]}</p>
             <p><strong>Outcome:</strong> {selectedEvent.Outcome}</p>
-            <div className="button-group">
-              <button onClick={() => setSelectedEvent(null)} className="general-button">Close</button>
+
+            <div className="flex gap-3 flex-wrap mt-4">
+              <button
+                onClick={() => setSelectedEvent(null)}
+                className="px-5 py-2 text-white bg-[#006A71] rounded-md font-semibold hover:bg-[#1769aa] transition"
+              >
+                Close
+              </button>
               {(selectedEvent.Year || selectedEvent.Month || selectedEvent.Date) && (
                 <a
                   href={generateOnThisDayLink(selectedEvent)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="general-button"
+                  className="px-5 py-2 text-white bg-[#006A71] rounded-md font-semibold hover:bg-[#1769aa] transition"
                 >
                   View on OnThisDate
                 </a>
               )}
               <button
-                className="general-button"
+                className="px-5 py-2 text-white bg-[#006A71] rounded-md font-semibold hover:bg-[#1769aa] transition"
                 onClick={() =>
                   navigate(`/search?query=${encodeURIComponent(selectedEvent["Name of Incident"])}`)
                 }
@@ -208,14 +218,13 @@ const TimelinePage = () => {
                 Search for more
               </button>
             </div>
-              
           </div>
         </div>
       )}
-      </div>
-      <Footer />
     </div>
-  );
-};
+    <Footer />
+  </div>
+);
+}
 
 export default TimelinePage;
