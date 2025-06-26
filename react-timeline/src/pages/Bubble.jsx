@@ -81,7 +81,7 @@ const BubblePage = () => {
           <button
             key={type}
             type="button"
-            className="px-5 py-2 text-white bg-[#006A71] rounded font-semibold text-base cursor-pointer transition hover:bg-[#66ff00] hover:-translate-y-0.5 hover:shadow-md"
+            className="px-5 py-2 text-white bg-[#006A71] rounded font-semibold text-base cursor-pointer transition hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md"
             onClick={() => setFilterType(type)}
           >
             {type}
