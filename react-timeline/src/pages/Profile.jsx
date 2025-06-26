@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-import '../style/pagestyle/Profile.css';
 import useSearchHistory from '../hooks/useSearchHistory';
 import useProfileForm from '../hooks/useProfileForm';
 import SearchHistory from '../components/profile/SearchHistory';
@@ -60,12 +59,17 @@ const Profile = () => {
 
   if (!userEmail) {
     return (
-      <div className="profile-main-page">
+      <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
         <Header />
-        <div className="profile-container">
-          <div className="error-message">
+        <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6 mt-12">
+          <div className="text-center bg-red-100 text-red-800 p-4 rounded-md">
             Please log in to view your profile
-            <button onClick={() => navigate('/login')} className="login-button">Go to Login</button>
+            <button
+              onClick={() => navigate('/login')}
+              className="block mx-auto mt-4 bg-[#006A71] text-white px-4 py-2 rounded-md hover:bg-[#10b2bd] transition"
+            >
+              Go to Login
+            </button>
           </div>
         </div>
         <Footer />
@@ -74,15 +78,23 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile-main-page">
+    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
       <Header />
-      <div className="profile-container">
-        <div className="profile-header">
-          <h2 className="app-title"> My Profile</h2>
+      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6 mt-12">
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-bold text-[#006A71] drop-shadow">My Profile</h2>
         </div>
 
-        {success && <div className="success-message">{success}</div>}
-        {error && <div className="error-message">{error}</div>}
+        {success && (
+          <div className="bg-green-100 text-green-800 text-center p-3 rounded-md mb-4">
+            {success}
+          </div>
+        )}
+        {error && (
+          <div className="bg-red-100 text-red-800 text-center p-3 rounded-md mb-4">
+            {error}
+          </div>
+        )}
 
         {isEditing ? (
           <ProfileForm
