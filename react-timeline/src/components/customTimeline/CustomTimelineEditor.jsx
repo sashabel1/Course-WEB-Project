@@ -21,11 +21,19 @@ const TimelineEditor = ({
       onTimelineNameChange={onEditTimelineName}
       isEditing={true}
     />
-    <div className='button-group'>
-      <button type="submit" onClick={onSave} className="general-button">
+    <div className="flex justify-center gap-4 mt-4">
+      <button
+        type="submit"
+        onClick={onSave}
+        className="px-4 py-2 bg-[#006A71] text-white rounded font-semibold hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md transition"
+      >
         Save Changes
       </button>
-      <button type="button" onClick={onCancel} className="general-button">
+      <button
+        type="button"
+        onClick={onCancel}
+        className="px-4 py-2 bg-[#006A71] text-white rounded font-semibold hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md transition"
+      >
         Cancel
       </button>
     </div>
