@@ -71,7 +71,7 @@ function Header() {
 
   return (
     <header
-      className="w-full bg-[#006A71] text-[#F2EFE7] px-10 py-5 flex items-center text-2xl font-extrabold shadow-md select-none relative justify-between"
+      className="w-full px-10 py-5 flex items-center text-2xl font-extrabold shadow-md select-none relative justify-between bg-[#006A71] text-[#F2EFE7] dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300"
     >
       {/* Center title - absolutely centered */}
       <div
@@ -86,7 +86,7 @@ function Header() {
       <div className="flex items-center gap-4">
         <button
           onClick={handleProfileClick}
-          className="bg-transparent border-none cursor-pointer px-4 py-2 rounded-md transition-colors duration-300 text-[#F2EFE7] text-lg hover:bg-white hover:bg-opacity-10"
+          className="bg-transparent border-none cursor-pointer px-4 py-2 rounded-md transition-colors duration-300 text-inherit text-lg hover:bg-white hover:bg-opacity-10 dark:hover:bg-gray-800 dark:hover:bg-opacity-50"
           aria-label="Profile"
         >
           <img src={profileImage} alt="Profile" className="w-8 h-8 rounded-full" />
@@ -95,7 +95,7 @@ function Header() {
         {showBackButton && (
           <button
             onClick={() => navigate(-1)}
-            className="bg-transparent border-none w-10 h-10 text-3xl text-[#F2EFE7] rounded-full flex items-center justify-center mr-auto hover:bg-white hover:bg-opacity-10 transition-colors duration-300"
+            className="bg-transparent border-none w-10 h-10 text-3xl text-inherit rounded-full flex items-center justify-center mr-auto hover:bg-white hover:bg-opacity-10 dark:hover:bg-gray-800 dark:hover:bg-opacity-50 transition-colors duration-300"
             title="Back"
           >
             ←
@@ -104,10 +104,25 @@ function Header() {
       </div>
 
       {/* Right side: logout button and dark mode toggle */}
-      <div className="ml-auto">
-        <button onClick={toggleDarkMode} className="darkmode-toggle" title="Toggle dark mode" style={{marginRight: '1rem'}}>
-          {darkMode ? '🌙 Dark' : '☀️ Light'}
-        </button>
+      <div className="ml-auto flex items-center gap-2">
+        <label className="relative inline-flex items-center cursor-pointer" style={{fontSize: '1rem'}}>
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={toggleDarkMode}
+            className="sr-only peer"
+            aria-label="Toggle dark mode"
+          />
+          <div className="w-10 h-5 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 dark:bg-gray-700 rounded-full peer peer-checked:bg-[#006A71] transition-colors duration-300">
+          </div>
+          <div className="absolute left-1 top-1 w-3.5 h-3.5 bg-white rounded-full shadow-md transition-transform duration-300 peer-checked:translate-x-5 flex items-center justify-center">
+            {darkMode ? (
+              <span className="text-yellow-400 text-xs">🌙</span>
+            ) : (
+              <span className="text-yellow-500 text-xs">☀️</span>
+            )}
+          </div>
+        </label>
         {isLoggedIn && (
           <button
             onClick={handleLogout}

@@ -76,47 +76,47 @@ function SearchBar({ onSearch }) {
             onChange={handleInputChange}
             placeholder="Search for a topic..."
             autoComplete="off"
-            className="w-full p-2 text-[20px] border border-gray-300 rounded"
+            className="w-full p-2 text-[20px] border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded transition-colors"
           />
           {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-300 rounded z-50 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-gray-400">
-              <div className="inline-flex p-2 gap-2">
-                {suggestions.map((suggestion, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-block px-3 py-1 bg-gray-100 rounded-full cursor-pointer text-[18px] whitespace-nowrap hover:bg-gray-200"
+            <div className="absolute left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded z-50 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-gray-400">
+              <div className="flex gap-2 p-2">
+                {suggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
                     onClick={() => handleSuggestionClick(suggestion)}
+                    className="inline-block px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full cursor-pointer text-[18px] whitespace-nowrap hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-gray-100"
                   >
                     {suggestion}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
           )}
         </div>
 
-        <div className="flex gap-[10px]">
+        <div className="flex gap-4 mb-4">
           <input
-            type="text"
+            type="number"
             value={startYear}
-            onChange={e => setStartYear(e.target.value)}
+            onChange={(e) => setStartYear(e.target.value)}
             placeholder="Start Year"
-            className="flex-1 p-2 text-[18px] border border-gray-300 rounded"
+            className="flex-1 p-2 text-[18px] border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded transition-colors"
           />
           <input
-            type="text"
+            type="number"
             value={endYear}
-            onChange={e => setEndYear(e.target.value)}
+            onChange={(e) => setEndYear(e.target.value)}
             placeholder="End Year"
-            className="flex-1 p-2 text-[18px] border border-gray-300 rounded"
+            className="flex-1 p-2 text-[18px] border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded transition-colors"
           />
         </div>
 
         <button
           type="submit"
-          className="px-5 py-2 text-white bg-[#006A71] rounded font-semibold text-base cursor-pointer transition hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md">
+          className="px-5 py-2 text-white bg-[#006A71] dark:bg-blue-600 rounded font-semibold text-base cursor-pointer transition hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md">
           Search
-      </button>
+        </button>
       </form>
     </div>
   );
