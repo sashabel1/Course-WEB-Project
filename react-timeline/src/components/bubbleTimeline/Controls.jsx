@@ -1,4 +1,16 @@
-// components/Timeline/Controls.jsx
+/**
+ * Controls - UI component for timeline settings.
+ *
+ * Displays a button to toggle timeline sort order (ascending/descending)
+ * and a color picker to change the timeline event border color.
+ *
+ * Props:
+ * - sortOrder (string): Current sort order, "asc" or "desc".
+ * - onSort (function): Callback to toggle sort order.
+ * - color (string): Current color value (hex).
+ * - onColorChange (function): Callback to handle color changes.
+ */
+
 const Controls = ({ sortOrder, onSort, color, onColorChange }) => (
   <div className="flex items-center justify-center gap-4 mb-4">
     <button

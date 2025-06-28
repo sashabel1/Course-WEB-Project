@@ -1,6 +1,26 @@
 import TimelineEvent from './TimelineEvent';
 import TimelineImages from './TimelineImages';
 
+/**
+ * Results component displays search results including Wikipedia summary,
+ * timeline events, and related side images.
+ *
+ * Props:
+ * - query: Search term string
+ * - startYear: Filter start year (optional)
+ * - endYear: Filter end year (optional)
+ * - fullText: Wikipedia summary text
+ * - timelineEvents: Array of timeline event objects with date and summary
+ * - images: Array of images (not used directly here)
+ * - getSideImages: Function to retrieve images for left/right side panels
+ *
+ * Features:
+ * - Shows Wikipedia summary in a collapsible section
+ * - Renders timeline events centered with a vertical line
+ * - Displays side image panels on left and right
+ * - Provides user feedback when no results or timeline events found
+ */
+
 export default function Results({
   query,
   startYear,

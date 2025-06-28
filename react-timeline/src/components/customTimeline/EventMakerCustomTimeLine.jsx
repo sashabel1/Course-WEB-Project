@@ -1,5 +1,20 @@
 import React from 'react';
 
+/**
+ * EventForm component renders a form for adding or editing a timeline event.
+ *
+ * Props:
+ * - eventData: object containing event fields (title, date, description)
+ * - onChange: input change handler function
+ * - onSubmit: form submit handler function
+ * - timelineName: optional timeline name string
+ * - onTimelineNameChange: handler for timeline name input changes
+ * - isEditing: boolean indicating if the form is in editing mode
+ *
+ * The form includes inputs for timeline name, event title, date, and description,
+ * and a submit button to add or update the event.
+ */
+
 const EventForm = ({ eventData, onChange, onSubmit, timelineName, onTimelineNameChange, isEditing }) => (
   <form 
     onSubmit={onSubmit} 

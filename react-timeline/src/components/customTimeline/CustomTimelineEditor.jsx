@@ -2,6 +2,19 @@ import React from 'react';
 import EventForm from './EventMakerCustomTimeLine';
 import TimelineView from './CustomTimelineView';
 
+/**
+ * TimelineEditor component for viewing and editing a custom timeline.
+ *
+ * Props:
+ * - selectedTimeline: timeline data with title and events
+ * - newEvent: data for the event being added or edited
+ * - onAddEvent: handler to add a new event
+ * - onEditTimelineName: handler to edit the timeline title
+ * - onChangeNewEvent: handler to update event form data
+ * - onSave: handler to save timeline changes
+ * - onCancel: handler to cancel editing
+ */
+
 const TimelineEditor = ({
   selectedTimeline,
   newEvent,

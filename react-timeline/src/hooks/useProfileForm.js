@@ -1,5 +1,30 @@
 import { useState } from 'react';
 
+/**
+ * useProfileForm - Custom React hook to manage user profile form state and update logic.
+ *
+ * Manages form data (email, new password, confirmation), validation, submission, and UI states
+ * including loading, success, and error messages. Handles profile updates via API.
+ *
+ * Parameters:
+ * - initialEmail (string): User's current email to initialize the form.
+ * - userId (string|number): ID of the user for API requests.
+ * - apiBase (string): Base URL for API endpoints.
+ * - onSuccessUpdate (function): Optional callback invoked when email changes successfully.
+ *
+ * Returns:
+ * - formData: Current form values.
+ * - error: Validation or server error message.
+ * - success: Success message after update.
+ * - loading: Boolean indicating if request is in progress.
+ * - isEditing: Boolean controlling edit mode state.
+ * - setIsEditing: Setter to toggle edit mode externally.
+ * - handleInputChange: Updates form state on user input.
+ * - handleSubmit: Validates and submits updated profile data to API.
+ * - cancelEdit: Resets form and exits edit mode.
+ */
+
+
 const useProfileForm = (initialEmail, userId, apiBase, onSuccessUpdate) => {
   const [formData, setFormData] = useState({
     email: initialEmail || '',

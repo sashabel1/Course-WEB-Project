@@ -1,5 +1,18 @@
 import React from 'react';
 
+/**
+ * TimelineImages component displays a responsive grid of images.
+ * 
+ * Props:
+ * - images: array of image objects with `src` and `alt` properties
+ * 
+ * Behavior:
+ * - Returns null if no images are provided or the array is empty
+ * - Displays images in a responsive grid with consistent aspect ratio (3:2)
+ * - Each image is centered, cropped, and fills its container
+ */
+
+
 const TimelineImages = ({ images }) => {
   if (!images || images.length === 0) return null;
 

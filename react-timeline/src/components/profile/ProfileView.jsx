@@ -1,3 +1,16 @@
+/**
+ * ProfileView component displays the user's email with options to edit profile or return.
+ * 
+ * Props:
+ * - email: user's email address (string)
+ * - onEdit: callback to trigger editing mode
+ * - onReturn: callback to navigate back to the choose page
+ *
+ * Features:
+ * - Responsive layout with clear labeling
+ * - Two action buttons with consistent styling and hover effects
+ */
+
 const ProfileView = ({ email, onEdit, onReturn }) => {
   return (
     <>

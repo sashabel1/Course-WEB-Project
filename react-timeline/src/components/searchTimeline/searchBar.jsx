@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
 import useSearchHistory from '../../hooks/useSearchHistory';
 
+/**
+ * SearchBar component provides a search input with autocomplete suggestions
+ * based on the user's previous search history, plus optional year range filters.
+ *
+ * Props:
+ * - onSearch: function called with { query, startYear, endYear } when search is submitted
+ *
+ * Features:
+ * - Retrieves user search history from custom hook (uses localStorage userId)
+ * - Filters suggestions matching input prefix (case-insensitive)
+ * - Shows suggestions dropdown; clicking a suggestion triggers search
+ * - Allows optional input of start and end year filters
+ * - Handles form submission via Enter key or Search button
+ */
+
 function SearchBar({ onSearch }) {
   const userId = localStorage.getItem('userId');
   const { history: searchHistory } = useSearchHistory(userId);

@@ -1,3 +1,18 @@
+/**
+ * ProfileForm component renders a user profile editing form.
+ * 
+ * Props:
+ * - formData: object containing email, newPassword, and confirmPassword fields
+ * - handleInputChange: function to update form data on input change
+ * - handleSubmit: function called on form submission to save changes
+ * - cancelEdit: function to cancel editing and reset the form
+ *
+ * Features:
+ * - Inputs for email and password change (with confirmation)
+ * - Responsive layout with accessible labels
+ * - Save and Cancel buttons with hover effects
+ */
+
 const ProfileForm = ({ formData, handleInputChange, handleSubmit, cancelEdit }) => (
   <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4 w-full">
     <div className="flex flex-col sm:flex-row items-start sm:items-center bg-gray-100 rounded-md p-4">

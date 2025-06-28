@@ -1,5 +1,19 @@
 import React, { useState } from 'react';
 
+/**
+ * TimelineEvent component renders a single event on a timeline.
+ * 
+ * Props:
+ * - date: string representing the event date
+ * - summary: string with event details, shown on toggle
+ * - index: number used to alternate event alignment (left/right)
+ * 
+ * Behavior:
+ * - Alternates event position between left and right sides based on index
+ * - Displays date as a clickable button that toggles visibility of the summary
+ * - Shows a styled dot marker aligned with the event position on the timeline
+ */
+
 const TimelineEvent = ({ date, summary, index }) => {
   const [showSummary, setShowSummary] = useState(false);
   const side = index % 2 === 0 ? 'left' : 'right';

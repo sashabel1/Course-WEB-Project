@@ -1,5 +1,15 @@
 import React from 'react';
 
+/**
+ * TimelineList component displays a list of user timelines.
+ *
+ * Props:
+ * - timelines: array of timeline objects to display
+ * - onSelect: callback invoked with the selected timeline on button click
+ *
+ * Renders a message if no timelines are available.
+ */
+
 const TimelineList = ({ timelines, onSelect }) => (
   <div className="mb-6">
     <h3 className="text-xl font-semibold text-[#006A71] mb-2">Your Timelines:</h3>

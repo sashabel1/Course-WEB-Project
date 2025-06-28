@@ -1,5 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
+/**
+ * generateOnThisDayLink - Generates a URL to the 'On This Day' website
+ * based on available date information from an event object.
+ *
+ * @param {object} event - Event containing Date, Month, and Year fields.
+ * @returns {string} URL pointing to the relevant 'On This Day' page.
+ */
 const generateOnThisDayLink = ({ Date: day, Month: month, Year: year }) => {
   const d = day?.toString().trim().toLowerCase();
   const m = month?.toString().trim().toLowerCase();
@@ -19,6 +26,20 @@ const generateOnThisDayLink = ({ Date: day, Month: month, Year: year }) => {
   if (isValidMonth && isValidDay) return `https://www.onthisday.com/day/${m}/${d}`;
   return "https://www.onthisday.com";
 };
+
+/**
+ * EventModal - Modal component displaying detailed information about a timeline event.
+ *
+ * Props:
+ * - event (object): Event data with detailed properties like date, place, impact, etc.
+ * - onClose (function): Callback to close the modal.
+ *
+ * Features:
+ * - Displays event details including date, location, impact, and key persons.
+ * - Provides external link to 'On This Day' based on event date.
+ * - Allows navigation to a search page for more related information.
+ * - Modal closes when clicking outside content or using the Close button.
+ */
 
 const EventModal = ({ event, onClose }) => {
   const navigate = useNavigate();
