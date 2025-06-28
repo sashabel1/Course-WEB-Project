@@ -77,4 +77,26 @@ router.put('/:timelineId', async (req, res) => {
   }
 });
 
+/**
+ * @route   DELETE /:timelineId
+ * @desc    Delete a timeline by ID
+ * @param   {string} timelineId - ID of the timeline
+ * @returns {Object}            - Deletion confirmation
+ */
+router.delete('/:timelineId', async (req, res) => {
+  const { timelineId } = req.params;
+
+  try {
+    const deletedTimeline = await Timeline.findByIdAndDelete(timelineId);
+    if (!deletedTimeline) {
+      return res.status(404).json({ message: 'Timeline not found' });
+    }
+
+    res.json({ message: 'Timeline deleted successfully', timeline: deletedTimeline });
+  } catch (err) {
+    handleServerError(res, err, 'Error deleting timeline');
+  }
+});
+
+
 module.exports = router;

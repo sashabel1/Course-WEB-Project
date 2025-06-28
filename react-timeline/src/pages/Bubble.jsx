@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import topicsData from "../data/topics.json";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
-import "../style/pagestyle/bubble.css";
+
 
 /**
  * BubblePage Component
@@ -74,14 +74,14 @@ const BubblePage = () => {
   };
 
   return (
-    <div className="bubble-page">
+    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
       <Header />
-      <div className="filter-bar">
+      <div className="flex justify-center my-5 gap-2">
         {FILTER_OPTIONS.map((type) => (
           <button
             key={type}
             type="button"
-            className={`general-button`}
+            className="px-5 py-2 text-white bg-[#006A71] rounded font-semibold text-base cursor-pointer transition hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md"
             onClick={() => setFilterType(type)}
           >
             {type}
@@ -89,7 +89,7 @@ const BubblePage = () => {
         ))}
       </div>
 
-      <div className="bubble-container">
+      <div className="relative w-full h-screen mx-auto rounded-2xl p-8 flex-1 bg-[#F2EFE7]">
         {filteredTopics.map((topic, idx) => {
           const { x, y, delay } = generateRandomPosition();
 
@@ -97,7 +97,7 @@ const BubblePage = () => {
             <button
               key={idx}
               type="button"
-              className="bubble"
+              className="absolute w-20 h-20 rounded-full p-0 flex items-center justify-center shadow-md transition-transform duration-300 ease-in-out animate-float hover:scale-110"
               data-x={x}
               data-y={y}
               data-delay={delay}
@@ -107,6 +107,9 @@ const BubblePage = () => {
                 backgroundImage: topic.image ? `url(${topic.image})` : "none",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
+                left: `calc(${x}vw)`,
+                top: `calc(${y}vh)`,
+                animationDelay: `${delay}s`,
               }}
             />
           );

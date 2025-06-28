@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-import '../style/pagestyle/choose.css';
 
 /**
  * Choose Component
@@ -28,18 +27,37 @@ const Choose = () => {
   const goToCreateTimeline = () => navigate('/custom-timeline');
 
   return (
-    <div className="choose-page">
+    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] font-sans">
       <Header />
-      <main className="choose-content">
-        <h1 className="app-title">Choose Your Experience</h1>
-        <div className="arrow-buttons-vertical">
-          <button className="arrow-block down" onClick={goToBubbles}>
+      <main className="flex flex-col items-center justify-start pt-20 h-screen flex-1">
+        <h1 className="text-[3rem] font-extrabold text-[#006A71] mb-8 text-center drop-shadow-md">
+          Choose Your Experience
+        </h1>
+        <div className="flex flex-col items-center gap-7">
+          <button
+            onClick={goToBubbles}
+            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#F2EFE7] text-[#006A71] border-2 border-[#006A71] font-bold text-[22px] rounded-lg transition-all duration-300 hover:bg-[#6db3b7] hover:shadow-lg hover:-translate-y-1 after:content-[''] after:absolute after:top-0 after:-right-[43px] after:border-t-[40px] after:border-b-[40px] after:border-l-[40px] after:border-transparent after:border-l-[#006A71] z-10"
+          >
             EXPLORE BUBBLES
           </button>
-          <button className="arrow-block up" onClick={goToTimelineSearch}>
+
+          <button
+            onClick={goToTimelineSearch}
+            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#006A71]
+             text-white font-bold text-[22px] rounded-lg transition-all duration-300 hover:bg-[#6db3b7]
+              hover:shadow-lg hover:-translate-y-1 before:content-[''] before:absolute before:top-0 before:-left-[43px]
+               before:border-t-[40px] before:border-b-[40px] before:border-r-[40px] before:border-transparent before:border-r-[#006A71] z-10 pl-[60px]"
+          >
             EXPLORE TIMELINE
           </button>
-          <button className="arrow-block down" onClick={goToCreateTimeline}>
+
+          <button
+            onClick={goToCreateTimeline}
+            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#F2EFE7] 
+            text-[#006A71] border-2 border-[#006A71] font-bold text-[22px] rounded-lg transition-all duration-300 
+            hover:bg-[#6db3b7] hover:shadow-lg hover:-translate-y-1 after:content-[''] after:absolute after:top-0 
+            after:-right-[43px] after:border-t-[40px] after:border-b-[40px] after:border-l-[40px] after:border-transparent after:border-l-[#006A71] z-10"
+          >
             CREATE YOUR OWN TIMELINE
           </button>
         </div>

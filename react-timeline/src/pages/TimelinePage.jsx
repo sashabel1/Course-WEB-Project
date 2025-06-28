@@ -2,30 +2,25 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
-import "../style/pagestyle/TimelinePage.css";
-import { useNavigate } from 'react-router-dom';
+import EventCard from "../components/bubbleTimeline/EventCard";
+import EventModal from "../components/bubbleTimeline/EventModal";
+import Controls from "../components/bubbleTimeline/Controls";
 
 /**
  * TimelinePage Component
  *
- * Displays a dynamic timeline of historical events based on a selected topic and type.
- * The topic and type are stored in localStorage and fetched on component mount.
+ * Renders a timeline of historical events filtered by topic and type from localStorage.
+ * Fetches data from backend API and supports sorting and color customization.
+ * Displays events as cards; clicking a card opens a modal with event details.
  *
- * Features:
- * - Loads timeline data for a specific topic and type from the backend
- * - Displays event details in a modal with additional metadata
- * - Provides external links to 'On This Day' pages based on the event date
- * - Offers quick navigation to a search page for any event
+ * Hooks:
+ * - useEffect for data fetching on mount
+ * - useState for state management
  *
- * Hooks used:
- * - useState: Manages component state (data, sorting, selection, color)
- * - useEffect: Triggers data fetching and initialization logic on mount
- *
- * External dependencies:
- * - LocalStorage: Reads topic and type selected from previous page
- * - Backend API: `/api/dataset` endpoint for timeline data
- * - onthisday.com: Generates links to external date-based history pages
+ * Components used:
+ * Header, Footer, Controls, EventCard, EventModal
  */
+
 
 const TimelinePage = () => {
   const [topic, setTopic] = useState(null);
@@ -35,7 +30,7 @@ const TimelinePage = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [color, setColor] = useState("#2563eb");
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     const storedTopic = localStorage.getItem("selectedTopic");
@@ -76,142 +71,78 @@ const TimelinePage = () => {
   const handleSort = () => setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   const handleColorChange = (e) => setColor(e.target.value);
 
+  
+  const monthToNumber = (month) => {
+      if (!month) return null;
+      const months = {
+        January: 1, February: 2, March: 3, April: 4,
+        May: 5, June: 6, July: 7, August: 8,
+        September: 9, October: 10, November: 11, December: 12,
+      };
+      return months[month] ?? null;
+    };
+
   const sortedTimeline = [...timeline].sort((a, b) => {
-    const aDate = new Date(`${a.Month || "January"} ${a.Date || 1}, ${a.Year}`);
-    const bDate = new Date(`${b.Month || "January"} ${b.Date || 1}, ${b.Year}`);
-    return sortOrder === "asc" ? aDate - bDate : bDate - aDate;
+    const aYear = parseInt(a.Year);
+    const bYear = parseInt(b.Year);
+
+    if (aYear !== bYear) {
+      return sortOrder === "asc" ? aYear - bYear : bYear - aYear;
+    }
+
+    const aMonth = monthToNumber(a.Month);
+    const bMonth = monthToNumber(b.Month);
+    const aMonthValue = aMonth !== null ? aMonth : 13;
+    const bMonthValue = bMonth !== null ? bMonth : 13;
+
+    if (aMonthValue !== bMonthValue) {
+      return sortOrder === "asc" ? aMonthValue - bMonthValue : bMonthValue - aMonthValue;
+    }
+
+    const aDay = a.Date ? parseInt(a.Date) : 31; 
+    const bDay = b.Date ? parseInt(b.Date) : 31;
+
+    return sortOrder === "asc" ? aDay - bDay : bDay - aDay;
   });
 
   if (!topic || !type) {
     return <div className="text-center p-6">Loading...</div>;
   }
 
-  const generateOnThisDayLink = (event) => {
-  const day = event.Date?.toString().trim().toLowerCase();
-  const month = event.Month?.toString().trim().toLowerCase();
-  const year = event.Year?.toString().trim();
-
-  const validMonths = [
-    "january", "february", "march", "april", "may", "june",
-    "july", "august", "september", "october", "november", "december"
-  ];
-
-  const isValidMonth = month && validMonths.includes(month);
-
-  const isValidDay = day && !isNaN(day) && Number(day) >= 1 && Number(day) <= 31;
-
-    if (year && isValidMonth && isValidDay) {
-      // year+month+day
-      return `https://www.onthisday.com/date/${year}/${month}/${day}`;
-    } else if (year && isValidMonth) {
-      // year+month
-      return `https://www.onthisday.com/date/${year}/${month}`;
-    } else if (year) {
-      // year only
-      return `https://www.onthisday.com/date/${year}`;
-    } else if (isValidMonth && isValidDay) {
-      // month+day
-      return `https://www.onthisday.com/day/${month}/${day}`;
-    } else {
-      // default to the main page
-      return "https://www.onthisday.com";
-    }
-  };
-
-
-
+  
   return (
-    <div className="timeline-page">
-      <Header /> 
-      <div className="timeline-Container" > 
-      <div class="container-wrapper"></div> 
-        <h1 className="app-title"> {topic} Timeline </h1>
+    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
+      <Header />
+      <div className="w-full flex-1 px-4 mt-8">
+        <h1 className="text-5xl font-extrabold text-[#006A71] mb-8 text-center drop-shadow-md">
+          {topic} Timeline
+        </h1>
 
-      {/* Controls */}
-      <div className="button-group">
-        <button onClick={handleSort} className="general-button">
-          {sortOrder === "asc" ? "Past → Future" : "Future → Past"}
-        </button>
-        <input
-          type="color"
-          value={color}
-          onChange={handleColorChange}
-          title="Pick timeline color"
+        <Controls
+          sortOrder={sortOrder}
+          onSort={handleSort}
+          color={color}
+          onColorChange={handleColorChange}
         />
-        
-      </div>
 
-      {/* Timeline */}
-      {loading ? (
-        <div className="text-center">Loading...</div>
-      ) : (
-        <div className="timeline-horizontal">
-          {sortedTimeline.map((event, idx) => (
-            <div
-              key={idx}
-              className="timeline-card"
-              style={{ borderColor: color }}
-              onClick={() => setSelectedEvent(event)}
-            >
-              <div className="timeline-date">{[
-                  event.Month,
-                  event.Year
-                ]
-                  .filter(val => val !== "Unknown" && val !== "לא ידוע")
-                  .join(" ")}
-              </div>
-              <div className="timeline-title">{event["Name of Incident"]}</div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Modal */}
-      {selectedEvent && (
-        <div className="timeline-modal" onClick={() => setSelectedEvent(null)}>
-          <div className="timeline-modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{selectedEvent["Name of Incident"]}</h2>
-            <p>
-              <strong>Date:</strong>{" "}
-              {[
-                selectedEvent.Date,
-                selectedEvent.Month,
-                selectedEvent.Year
-              ]
-                .filter(val => val !== "Unknown")
-                .join(" ") || "Unknown"}
-            </p>
-            <p><strong>Country:</strong> {selectedEvent.Country}</p>
-            <p><strong>Place:</strong> {selectedEvent["Place Name"]}</p>
-            <p><strong>Impact:</strong> {selectedEvent.Impact}</p>
-            <p><strong>Affected Population:</strong> {selectedEvent["Affected Population"]}</p>
-            <p><strong>Important Person/Group Responsible:</strong> {selectedEvent["Important Person/Group Responsible"]}</p>
-            <p><strong>Outcome:</strong> {selectedEvent.Outcome}</p>
-            <div className="button-group">
-              <button onClick={() => setSelectedEvent(null)} className="general-button">Close</button>
-              {(selectedEvent.Year || selectedEvent.Month || selectedEvent.Date) && (
-                <a
-                  href={generateOnThisDayLink(selectedEvent)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="general-button"
-                >
-                  View on OnThisDate
-                </a>
-              )}
-              <button
-                className="general-button"
-                onClick={() =>
-                  navigate(`/search?query=${encodeURIComponent(selectedEvent["Name of Incident"])}`)
-                }
-              >
-                Search for more
-              </button>
-            </div>
-              
+        {loading ? (
+          <div className="text-center">Loading...</div>
+        ) : (
+          <div className="flex overflow-x-auto py-4 px-4 gap-4 scroll-smooth">
+            {sortedTimeline.map((event, idx) => (
+              <EventCard
+                key={idx}
+                event={event}
+                onClick={() => setSelectedEvent(event)}
+                borderColor={color}
+              />
+            ))}
           </div>
-        </div>
-      )}
+        )}
+
+        {selectedEvent && (
+          <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+        )}
       </div>
       <Footer />
     </div>

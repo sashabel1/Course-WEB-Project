@@ -7,7 +7,6 @@ import Results from '../components/searchTimeline/Results';
 import Loading from '../components/searchTimeline/Loading';
 import ErrorBox from '../components/searchTimeline/ErrorBox';
 import useTimelineSearch from '../hooks/useTimelineSearch';
-import '../style/pagestyle/Search.css';
 
 /**
  * Search Component
@@ -96,24 +95,29 @@ const Search = () => {
   );
 
   return (
-    <div className="search-page">
+    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
       <Header />
-      <div className="search-container">
-      <h1 className="app-title">Timeline Search</h1>
-      <SearchBar onSearch={handleSearch} initialQuery={query} initialStartYear={startYear} initialEndYear={endYear} />
-      {loading && query && <Loading query={query} />}
-      {error && <ErrorBox error={error} />}
-      {!loading && !error && query && (
-        <Results
-          query={query}
-          startYear={startYear}
-          endYear={endYear}
-          fullText={fullText}
-          timelineEvents={timelineEvents}
-          images={images}
-          getSideImages={getSideImages}
+      <div className="flex flex-col items-center w-full m-5 flex-1">
+        <h1 className="text-4xl font-bold text-[#006A71] text-center mb-6">Timeline Search</h1>
+        <SearchBar
+          onSearch={handleSearch}
+          initialQuery={query}
+          initialStartYear={startYear}
+          initialEndYear={endYear}
         />
-      )}
+        {loading && query && <Loading query={query} />}
+        {error && <ErrorBox error={error} />}
+        {!loading && !error && query && (
+          <Results
+            query={query}
+            startYear={startYear}
+            endYear={endYear}
+            fullText={fullText}
+            timelineEvents={timelineEvents}
+            images={images}
+            getSideImages={getSideImages}
+          />
+        )}
       </div>
       <Footer />
     </div>

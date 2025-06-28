@@ -4,7 +4,7 @@ import Footer from '../components/common/Footer';
 import TimelineList from '../components/customTimeline/CustomTimelineList';
 import TimelineEditor from '../components/customTimeline/CustomTimelineEditor';
 import NewTimelineEditor from '../components/customTimeline/NewCustomTimelineEditor';
-import '../style/pagestyle/customTimeline.css';
+
 
 /**
  * CustomTimeline Component
@@ -57,22 +57,29 @@ const CustomTimeline = () => {
     setNewEvent(prev => ({ ...prev, [name]: value }));
   };
 
-  // Add event either to selected timeline or to the new timeline events list
   const handleAddEvent = (e) => {
     e.preventDefault();
     if (!newEvent.title || !newEvent.date) return;
 
+    const cleanDate = newEvent.date.slice(0, 10); 
+
+    const cleanedEvent = {
+      ...newEvent,
+      date: cleanDate,
+    };
+
     if (selectedTimeline) {
       setSelectedTimeline(prev => ({
         ...prev,
-        events: [...prev.events, newEvent],
+        events: [...prev.events, cleanedEvent],
       }));
     } else {
-      setEvents(prev => [...prev, newEvent]);
+      setEvents(prev => [...prev, cleanedEvent]);
     }
 
     setNewEvent({ title: '', date: '', description: '' });
   };
+
 
   // Save a new timeline
   const saveNewTimeline = async () => {
@@ -135,14 +142,35 @@ const CustomTimeline = () => {
     setSelectedTimeline(prev => ({ ...prev, title: newTitle }));
   };
 
+  // Delete a selected timeline
+  const deleteTimeline = async () => {
+    if (!selectedTimeline) return;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/${selectedTimeline._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert('Timeline deleted successfully!');
+        setSelectedTimeline(null);
+        fetchTimelines();
+      } else {
+        alert('Error deleting timeline: ' + data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Failed to delete timeline');
+    }
+  };
+
   return (
-    <div className="custom-timeline-page">
+    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
       <Header />
-      <div className="custom-timeline-container">
-        <h2 className="app-title">Build Your Own Timeline</h2>
+      <div className="max-w-3xl w-full mx-auto px-5 py-8 flex-1">
+        <h2 className="text-3xl font-extrabold text-center text-[#006A71] mb-8 drop-shadow-md">Build Your Own Timeline</h2>
         <TimelineList timelines={timelines} onSelect={setSelectedTimeline} />
 
-        <div className="timeline-editor">
+        <div className="mt-6">
           {selectedTimeline ? (
             <TimelineEditor
               selectedTimeline={selectedTimeline}
@@ -152,6 +180,7 @@ const CustomTimeline = () => {
               onChangeNewEvent={handleNewEventChange}
               onSave={saveExistingTimeline}
               onCancel={() => setSelectedTimeline(null)}
+              onDelete={deleteTimeline}
             />
           ) : (
             <NewTimelineEditor

@@ -1,15 +1,29 @@
 import React from 'react';
 
+/**
+ * TimelineView component renders a vertical timeline of events sorted by date.
+ *
+ * Props:
+ * - events: array of event objects with `date`, `title`, and `description`
+ *
+ * Each event is displayed with a date label, title, and description.
+ */
+
 const TimelineView = ({ events }) => {
   const sortedEvents = [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
-    <div className="timeline">
+    <div className="border-l-2 border-gray-700 pl-5">
       {sortedEvents.map((event, index) => (
-        <div key={index} className="timeline-event">
-          <div className="event-date">{event.date}</div>
-          <div className="event-details">
-            <h4>{event.title}</h4>
-            <p>{event.description}</p>
+        <div key={index} className="relative mb-5">
+
+          <div className="absolute -left-[25px] top-1 w-2.5 h-2.5 bg-gray-700 rounded-full"></div>
+          
+          <div className="font-bold text-gray-600">{event.date}</div>
+          
+          <div className="mt-1">
+            <h4 className="text-lg font-semibold">{event.title}</h4>
+            <p className="text-sm text-gray-700">{event.description}</p>
           </div>
         </div>
       ))}

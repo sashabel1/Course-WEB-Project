@@ -23,7 +23,7 @@ const mongoose = require('mongoose');
 
 const EventSchema = new mongoose.Schema({
   title: String,
-  date: Date,
+  date: String,
   description: String,
   imageUrl: String
 });
