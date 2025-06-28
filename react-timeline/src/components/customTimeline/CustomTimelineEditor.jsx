@@ -40,14 +40,14 @@ const TimelineEditor = ({
       <button
         type="submit"
         onClick={onSave}
-        className="px-4 py-2 bg-[#006A71] text-white rounded font-semibold hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md transition"
+        className="px-4 py-2 bg-[#006A71] dark:bg-blue-600 text-white rounded font-semibold hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md transition"
       >
         Save Changes
       </button>
       <button
         type="button"
         onClick={onCancel}
-        className="px-4 py-2 bg-[#006A71] text-white rounded font-semibold hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md transition"
+        className="px-4 py-2 bg-[#006A71] dark:bg-blue-600 text-white rounded font-semibold hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md transition"
       >
         Cancel
       </button>
@@ -58,7 +58,7 @@ const TimelineEditor = ({
             onDelete();
           }
         }}
-        className="px-4 py-2 bg-red-600 text-white rounded font-semibold hover:bg-red-700 hover:-translate-y-0.5 hover:shadow-md transition"
+        className="px-4 py-2 bg-red-600 dark:bg-red-700 text-white rounded font-semibold hover:bg-red-700 dark:hover:bg-red-800 hover:-translate-y-0.5 hover:shadow-md transition"
       >
         Delete
       </button>

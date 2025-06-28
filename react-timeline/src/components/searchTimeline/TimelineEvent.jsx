@@ -34,7 +34,7 @@ const TimelineEvent = ({ date, summary, index }) => {
         </button>
         {showSummary && (
           <div className="bg-[#f0f0f0] dark:bg-gray-800 p-2 rounded-md mt-1 shadow-md">
-            {summary}
+            <p className="text-[#333] dark:text-gray-200 text-[14px] leading-[1.4]">{summary}</p>
           </div>
         )}
       </div>
