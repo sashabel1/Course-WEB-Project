@@ -23,6 +23,7 @@ const TimelineEditor = ({
   onChangeNewEvent,
   onSave,
   onCancel,
+  onDelete,
 }) => (
   <>
     <TimelineView events={selectedTimeline.events} />
@@ -48,6 +49,17 @@ const TimelineEditor = ({
         className="px-4 py-2 bg-[#006A71] text-white rounded font-semibold hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md transition"
       >
         Cancel
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          if (window.confirm("Are you sure you want to delete this timeline?")) {
+            onDelete();
+          }
+        }}
+        className="px-4 py-2 bg-red-600 text-white rounded font-semibold hover:bg-red-700 hover:-translate-y-0.5 hover:shadow-md transition"
+      >
+        Delete
       </button>
     </div>
   </>

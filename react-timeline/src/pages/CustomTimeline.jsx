@@ -142,6 +142,27 @@ const CustomTimeline = () => {
     setSelectedTimeline(prev => ({ ...prev, title: newTitle }));
   };
 
+  // Delete a selected timeline
+  const deleteTimeline = async () => {
+    if (!selectedTimeline) return;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API}/api/customtimelines/${selectedTimeline._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert('Timeline deleted successfully!');
+        setSelectedTimeline(null);
+        fetchTimelines();
+      } else {
+        alert('Error deleting timeline: ' + data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Failed to delete timeline');
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
       <Header />
@@ -159,6 +180,7 @@ const CustomTimeline = () => {
               onChangeNewEvent={handleNewEventChange}
               onSave={saveExistingTimeline}
               onCancel={() => setSelectedTimeline(null)}
+              onDelete={deleteTimeline}
             />
           ) : (
             <NewTimelineEditor
