@@ -34,7 +34,7 @@ const TimelineEditor = ({
       onSubmit={onAddEvent}
       timelineName={selectedTimeline.title}
       onTimelineNameChange={onEditTimelineName}
-      isEditing={true}
+      isEditing={false}
     />
     <div className="w-full flex justify-center gap-4 mt-4">
       <button

@@ -80,7 +80,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-12">
+      <div className="flex-1 w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-12 mb-12">
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-[#006A71] dark:text-gray-100 drop-shadow">My Profile</h2>
         </div>
