@@ -13,6 +13,7 @@ import TimelineView from './CustomTimelineView';
  * - onChangeNewEvent: handler to update event form data
  * - onSave: handler to save timeline changes
  * - onCancel: handler to cancel editing
+ * - onDelete: handler to delete the timeline
  */
 
 const TimelineEditor = ({
@@ -35,7 +36,7 @@ const TimelineEditor = ({
       onTimelineNameChange={onEditTimelineName}
       isEditing={true}
     />
-    <div className="flex justify-center gap-4 mt-4">
+    <div className="w-full flex justify-center gap-4 mt-4">
       <button
         type="submit"
         onClick={onSave}
