@@ -57,22 +57,29 @@ const CustomTimeline = () => {
     setNewEvent(prev => ({ ...prev, [name]: value }));
   };
 
-  // Add event either to selected timeline or to the new timeline events list
   const handleAddEvent = (e) => {
     e.preventDefault();
     if (!newEvent.title || !newEvent.date) return;
 
+    const cleanDate = newEvent.date.slice(0, 10); 
+
+    const cleanedEvent = {
+      ...newEvent,
+      date: cleanDate,
+    };
+
     if (selectedTimeline) {
       setSelectedTimeline(prev => ({
         ...prev,
-        events: [...prev.events, newEvent],
+        events: [...prev.events, cleanedEvent],
       }));
     } else {
-      setEvents(prev => [...prev, newEvent]);
+      setEvents(prev => [...prev, cleanedEvent]);
     }
 
     setNewEvent({ title: '', date: '', description: '' });
   };
+
 
   // Save a new timeline
   const saveNewTimeline = async () => {
