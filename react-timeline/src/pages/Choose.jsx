@@ -36,23 +36,32 @@ const Choose = () => {
         <div className="flex flex-col items-center gap-6 mt-8">
           <button
             onClick={() => navigate('/search')}
-            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#F2EFE7] dark:bg-gray-800 text-[#006A71] dark:text-gray-100 border-2 border-[#006A71] dark:border-blue-600 font-bold text-[22px] rounded-lg transition-all duration-300 shadow-[0_8px_16px_rgba(0,106,113,0.3)] dark:shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:-translate-y-[5px] hover:shadow-[0_12px_24px_rgba(0,106,113,0.4)] dark:hover:shadow-[0_12px_24px_rgba(0,0,0,0.4)] hover:bg-[#006A71] hover:text-white dark:hover:bg-blue-600"
+            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#F2EFE7] dark:bg-gray-800 text-[#006A71] dark:text-gray-100 border-2 border-[#006A71] dark:border-blue-600 font-bold text-[22px] rounded-lg transition-all duration-300 shadow-[0_8px_16px_rgba(0,106,113,0.3)] dark:shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:-translate-y-[5px] hover:shadow-[0_12px_24px_rgba(0,106,113,0.4)] dark:hover:shadow-[0_12px_24px_rgba(0,0,0,0.4)] hover:bg-[#006A71] hover:text-white dark:hover:bg-blue-600 group"
           >
-            Search Timeline
+            <span className="flex items-center gap-3">
+              Search Timeline
+              <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">→</span>
+            </span>
           </button>
           
           <button
             onClick={() => navigate('/bubble')}
-            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#006A71] dark:bg-blue-600 text-white font-bold text-[22px] rounded-lg transition-all duration-300 shadow-[0_8px_16px_rgba(0,106,113,0.3)] dark:shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:-translate-y-[5px] hover:shadow-[0_12px_24px_rgba(0,106,113,0.4)] dark:hover:shadow-[0_12px_24px_rgba(0,0,0,0.4)]"
+            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#006A71] dark:bg-blue-600 text-white font-bold text-[22px] rounded-lg transition-all duration-300 shadow-[0_8px_16px_rgba(0,106,113,0.3)] dark:shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:-translate-y-[5px] hover:shadow-[0_12px_24px_rgba(0,106,113,0.4)] dark:hover:shadow-[0_12px_24px_rgba(0,0,0,0.4)] group"
           >
-            Bubble Timeline
+            <span className="flex items-center gap-3">
+              Bubble Timeline
+              <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">→</span>
+            </span>
           </button>
           
           <button
             onClick={() => navigate('/custom-timeline')}
-            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#F2EFE7] dark:bg-gray-800 text-[#006A71] dark:text-gray-100 border-2 border-[#006A71] dark:border-blue-600 font-bold text-[22px] rounded-lg transition-all duration-300 shadow-[0_8px_16px_rgba(0,106,113,0.3)] dark:shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:-translate-y-[5px] hover:shadow-[0_12px_24px_rgba(0,106,113,0.4)] dark:hover:shadow-[0_12px_24px_rgba(0,0,0,0.4)] hover:bg-[#006A71] hover:text-white dark:hover:bg-blue-600"
+            className="relative inline-flex items-center justify-center h-20 w-[450px] min-w-[200px] bg-[#F2EFE7] dark:bg-gray-800 text-[#006A71] dark:text-gray-100 border-2 border-[#006A71] dark:border-blue-600 font-bold text-[22px] rounded-lg transition-all duration-300 shadow-[0_8px_16px_rgba(0,106,113,0.3)] dark:shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:-translate-y-[5px] hover:shadow-[0_12px_24px_rgba(0,106,113,0.4)] dark:hover:shadow-[0_12px_24px_rgba(0,0,0,0.4)] hover:bg-[#006A71] hover:text-white dark:hover:bg-blue-600 group"
           >
-            Custom Timeline
+            <span className="flex items-center gap-3">
+              Custom Timeline
+              <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">→</span>
+            </span>
           </button>
         </div>
       </main>

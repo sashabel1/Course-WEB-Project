@@ -76,19 +76,7 @@ const BubblePage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
-      <div className="flex gap-4 items-center mb-4">
-        <h1 className="text-3xl font-bold text-[#006A71] dark:text-gray-100">Bubble Timeline</h1>
-        <button
-          onClick={() => {
-            localStorage.removeItem("selectedTopic");
-            localStorage.removeItem("selectedType");
-            navigate("/");
-          }}
-          className="px-5 py-2 text-white bg-[#006A71] dark:bg-blue-600 rounded font-semibold text-base cursor-pointer transition hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md"
-        >
-          Reset
-        </button>
-      </div>
+      
       <div className="flex justify-center my-5 gap-2">
         {FILTER_OPTIONS.map((type) => (
           <button
@@ -101,7 +89,7 @@ const BubblePage = () => {
           </button>
         ))}
       </div>
-
+      
       <div className="relative w-full h-screen mx-auto rounded-2xl p-8 flex-1 bg-[#F2EFE7] dark:bg-gray-900">
         {filteredTopics.map((topic, idx) => {
           const { x, y, delay } = generateRandomPosition();
