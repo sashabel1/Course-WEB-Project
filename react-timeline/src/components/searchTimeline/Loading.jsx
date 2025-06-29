@@ -6,7 +6,7 @@ const Loading = ({ query }) => {
       <p className="text-lg text-gray-700 mb-2">
         Searching for: <span className="text-teal-700 font-semibold">{query}</span>
       </p>
-      <p className="text-xl text-gray-500 animate-pulse">Loading timeline...</p>
+      <p className="text-xl text-gray-500 dark:text-gray-300 animate-pulse">Loading timeline...</p>
     </div>
   );
 };

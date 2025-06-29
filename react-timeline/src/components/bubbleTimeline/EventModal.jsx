@@ -45,45 +45,82 @@ const EventModal = ({ event, onClose }) => {
   const navigate = useNavigate();
 
   return (
+  <div
+    className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex justify-center items-center z-[1000]"
+    onClick={onClose}
+  >
     <div
-      className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex justify-center items-center z-[1000]"
-      onClick={onClose}
+      className="
+        bg-[#F2EFE7] dark:bg-gray-900 
+        rounded-xl 
+        border-4 border-[#006A71] dark:border-[#3dd6f3] 
+        p-4 w-[90%] max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl relative
+        text-black dark:text-white
+      "
+      onClick={(e) => e.stopPropagation()}
     >
-      <div
-        className="bg-[#F2EFE7] rounded-xl border-4 border-[#006A71] p-4 w-[90%] max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl relative"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <h2 className="text-2xl mb-4 text-[#0e868f]">{event["Name of Incident"]}</h2>
-        <p><strong>Date:</strong> {[event.Date, event.Month, event.Year].filter(val => val !== "Unknown").join(" ") || "Unknown"}</p>
-        <p><strong>Country:</strong> {event.Country}</p>
-        <p><strong>Place:</strong> {event["Place Name"]}</p>
-        <p><strong>Impact:</strong> {event.Impact}</p>
-        <p><strong>Affected Population:</strong> {event["Affected Population"]}</p>
-        <p><strong>Important Person/Group Responsible:</strong> {event["Important Person/Group Responsible"]}</p>
-        <p><strong>Outcome:</strong> {event.Outcome}</p>
+      <h2 className="text-2xl mb-4">{event["Name of Incident"]}</h2>
+      <p><strong className="dark:text-[#66d9f0]">Date:</strong> {[event.Date, event.Month, event.Year].filter(val => val !== "Unknown").join(" ") || "Unknown"}</p>
+      <p><strong className="dark:text-[#66d9f0]">Country:</strong> {event.Country}</p>
+      <p><strong className="dark:text-[#66d9f0]">Place:</strong> {event["Place Name"]}</p>
+      <p><strong className="dark:text-[#66d9f0]">Impact:</strong> {event.Impact}</p>
+      <p><strong className="dark:text-[#66d9f0]">Affected Population:</strong> {event["Affected Population"]}</p>
+      <p><strong className="dark:text-[#66d9f0]">Important Person/Group Responsible:</strong> {event["Important Person/Group Responsible"]}</p>
+      <p><strong className="dark:text-[#66d9f0]">Outcome:</strong> {event.Outcome}</p>
 
-        <div className="flex gap-3 flex-wrap mt-4">
-          <button onClick={onClose} className="px-5 py-2 text-white bg-[#006A71] rounded-md font-semibold hover:bg-[#1769aa] transition">Close</button>
-          {(event.Year || event.Month || event.Date) && (
-            <a
-              href={generateOnThisDayLink(event)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2 text-white bg-[#006A71] rounded-md font-semibold hover:bg-[#1769aa] transition"
-            >
-              View on OnThisDay
-            </a>
-          )}
-          <button
-            onClick={() => navigate(`/search?query=${encodeURIComponent(event["Name of Incident"])}`)}
-            className="px-5 py-2 text-white bg-[#006A71] rounded-md font-semibold hover:bg-[#1769aa] transition"
+      <div className="flex gap-3 flex-wrap mt-4">
+        <button
+          onClick={onClose}
+          className="
+            px-5 py-2 
+            text-white dark:text-black
+            bg-[#006A71] dark:bg-[#3dd6f3] 
+            rounded-md font-semibold 
+            hover:bg-[#1769aa] dark:hover:bg-[#0f7389] 
+            transition
+          "
+        >
+          Close
+        </button>
+
+        {(event.Year || event.Month || event.Date) && (
+          <a
+            href={generateOnThisDayLink(event)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              px-5 py-2 
+              text-white dark:text-black
+              bg-[#006A71] dark:bg-[#3dd6f3] 
+              rounded-md font-semibold 
+              hover:bg-[#1769aa] dark:hover:bg-[#0f7389] 
+              transition
+            "
           >
-            Search for more
-          </button>
-        </div>
+            View on OnThisDay
+          </a>
+        )}
+
+        <button
+          onClick={() => navigate(`/search?query=${encodeURIComponent(event["Name of Incident"])}`)}
+          className="
+            px-5 py-2 
+            text-white dark:text-black
+            bg-[#006A71] dark:bg-[#3dd6f3] 
+            rounded-md font-semibold 
+            hover:bg-[#1769aa] dark:hover:bg-[#0f7389] 
+            transition
+          "
+        >
+          Search for more
+        </button>
       </div>
+
     </div>
-  );
+  </div>
+);
+
+
 };
 
 export default EventModal;

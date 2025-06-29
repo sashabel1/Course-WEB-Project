@@ -114,9 +114,14 @@ function SearchBar({ onSearch }) {
 
         <button
           type="submit"
-          className="px-5 py-2 text-white bg-[#006A71] rounded font-semibold text-base cursor-pointer transition hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md">
+          className="
+            px-5 py-2 text-white bg-[#006A71] rounded font-semibold text-base cursor-pointer 
+            transition
+            hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md
+            dark:bg-[#3dd6f3] dark:text-gray-900
+            dark:hover:bg-[#0f7389]">
           Search
-      </button>
+        </button>
       </form>
     </div>
   );

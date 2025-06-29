@@ -1,5 +1,6 @@
-import { useNavigate ,useLocation } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ThemeContext } from '../../context/ThemeContext';
 
 /**
  * Header Component
@@ -23,6 +24,7 @@ const profileImage = "data:image/svg+xml,%3Csvg width='32' height='32'  viewBox=
 
 function Header() {
   const navigate = useNavigate();
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const isLoggedIn = !!localStorage.getItem('userEmail');
 
@@ -49,10 +51,14 @@ function Header() {
 
   const location = useLocation();
   const showBackButton = ["/bubble", "/search", "/timeline" ,"/custom-timeline"].includes(location.pathname);
-
+  
   return (
     <header
-      className="w-full bg-[#006A71] text-[#F2EFE7] px-10 py-5 flex items-center text-2xl font-extrabold shadow-md select-none relative justify-between"
+       className="w-full bg-[#006A71] text-[#F2EFE7] 
+             dark:bg-gray-800 dark:text-gray-100
+             px-10 py-5 flex items-center text-2xl font-extrabold 
+             shadow-md select-none relative justify-between 
+             transition-colors duration-300"
     >
       {/* Center title - absolutely centered */}
       <div
@@ -85,12 +91,26 @@ function Header() {
       </div>
 
       {/* Right side: logout button */}
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center gap-4">
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className={`w-14 h-8 flex items-center rounded-full p-1 transition-colors duration-300 
+                      ${darkMode ? 'bg-gray-600' : 'bg-yellow-400'}`}
+          aria-label="Toggle Dark Mode"
+        >
+          <div
+            className={`w-6 h-6 rounded-full shadow-md transform duration-300 ease-in-out flex items-center justify-center text-lg
+                        ${darkMode ? 'translate-x-6 bg-white text-gray-800' : 'translate-x-0 bg-white text-yellow-500'}`}
+          >
+            {darkMode ? '🌙' : '☀️'}
+          </div>
+        </button>
+
         {isLoggedIn && (
           <button
             onClick={handleLogout}
             disabled={isLoggingOut}
-            className="ml-auto px-4 py-1.5 bg-red-600 text-white rounded-md border-none cursor-pointer text-lg font-semibold transition-colors duration-200 hover:bg-red-700 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="px-4 py-1.5 bg-red-600 text-white rounded-md border-none cursor-pointer text-lg font-semibold transition-colors duration-200 hover:bg-red-700 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isLoggingOut ? 'Logging out...' : 'Logout'}
           </button>

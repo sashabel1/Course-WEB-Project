@@ -24,13 +24,21 @@ const ProfileView = ({ email, onEdit, onReturn }) => {
       <div className="flex justify-center gap-4 mt-6 flex-wrap">
         <button
           onClick={onEdit}
-          className="bg-[#006A71] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#10b2bd] transition"
-        >
+          className="
+              px-5 py-2 rounded font-semibold text-base cursor-pointer transition-all duration-300
+              bg-[#006A71] text-white
+              dark:bg-[#3dd6f3] dark:text-gray-900
+              hover:bg-[#6db3b7] dark:hover:bg-[#0f7389]"
+              >
           Edit Profile
         </button>
         <button
           onClick={onReturn}
-          className="bg-[#006A71] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#10b2bd] transition"
+          className="
+            px-5 py-2 rounded font-semibold text-base cursor-pointer transition-all duration-300
+            bg-[#006A71] text-white
+            dark:bg-[#3dd6f3] dark:text-gray-900
+            hover:bg-[#6db3b7] dark:hover:bg-[#0f7389]"
         >
           Return to Choose
         </button>
