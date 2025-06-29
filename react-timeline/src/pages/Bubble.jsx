@@ -76,21 +76,31 @@ const BubblePage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
-      
-      <div className="flex justify-center my-5 gap-2">
-        {FILTER_OPTIONS.map((type) => (
-          <button
-            key={type}
-            type="button"
-            className="px-5 py-2 text-white bg-[#006A71] dark:bg-blue-600 rounded font-semibold text-base cursor-pointer transition hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md"
-            onClick={() => setFilterType(type)}
-          >
-            {type}
-          </button>
-        ))}
+
+      <div className="flex justify-center my-5 gap-2 flex-wrap">
+        {FILTER_OPTIONS.map((type) => {
+          const isActive = filterType === type;
+          return (
+            <button
+              key={type}
+              type="button"
+              onClick={() => setFilterType(type)}
+              className={`
+                px-5 py-2 rounded-md font-semibold text-base cursor-pointer transition-all duration-300
+                border-2
+                ${isActive 
+                  ? 'bg-[#006A71] text-white dark:bg-[#3dd6f3] dark:text-black border-[#006A71] dark:border-[#3dd6f3]'
+                  : 'bg-[#F2EFE7] text-[#006A71] dark:bg-gray-800 dark:text-[#3dd6f3] border-[#006A71] dark:border-[#3dd6f3]'
+                }
+                hover:bg-[#6db3b7] dark:hover:bg-[#0f7389]
+              `}
+            >
+              {type}
+            </button>
+          );
+        })}
       </div>
-      
-      <div className="relative w-full h-screen mx-auto rounded-2xl p-8 flex-1 bg-[#F2EFE7] dark:bg-gray-900">
+      <div className="relative w-full h-screen mx-auto rounded-2xl p-8 flex-1 bg-[#F2EFE7] dark:bg-gray-800 transition-colors duration-300">
         {filteredTopics.map((topic, idx) => {
           const { x, y, delay } = generateRandomPosition();
 

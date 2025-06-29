@@ -12,17 +12,23 @@ import React from 'react';
 
 const TimelineList = ({ timelines, onSelect }) => (
   <div className="mb-6">
-    <h3 className="text-xl font-semibold text-[#006A71] dark:text-gray-100 mb-2">Your Timelines:</h3>
-    {timelines.length === 0 ? (
-      <p className="text-gray-600 dark:text-gray-400">No timelines found.</p>
-    ) : (
+    <h3 className="text-xl font-semibold text-[#006A71] dark:text-[#3dd6f3] mb-2">
+        Your Timelines:
+      </h3>
+      {timelines.length === 0 ? (
+        <p className="text-gray-600 dark:text-gray-300">No timelines found.</p>
+      ) : (
       <ul className="flex flex-row gap-2 flex-wrap pb-5">
         {timelines.map((tl) => (
           <li key={tl._id}>
             <button
               onClick={() => onSelect(tl)}
-              className="px-4 py-2 bg-[#006A71] dark:bg-blue-600 text-white rounded font-semibold text-base cursor-pointer transition hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md"
-            >
+              className="
+              px-5 py-2 rounded font-semibold text-base cursor-pointer transition-all duration-300
+              bg-[#006A71] text-white
+              dark:bg-[#3dd6f3] dark:text-gray-900
+              hover:bg-[#6db3b7] dark:hover:bg-[#0f7389]"
+              >
               {tl.title}
             </button>
           </li>

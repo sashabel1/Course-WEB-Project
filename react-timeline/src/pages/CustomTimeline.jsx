@@ -167,7 +167,9 @@ const CustomTimeline = () => {
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
       <div className="max-w-3xl w-full mx-auto px-5 py-8 flex-1">
-        <h2 className="text-3xl font-extrabold text-center text-[#006A71] dark:text-gray-100 mb-8 drop-shadow-md">Build Your Own Timeline</h2>
+        <h2 className="text-5xl font-extrabold text-[#006A71] dark:text-[#3dd6f3] mb-8 text-center drop-shadow-md">
+          Build Your Own Timeline
+        </h2>
         <TimelineList timelines={timelines} onSelect={setSelectedTimeline} />
 
         <div className="mt-6">

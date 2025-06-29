@@ -4,7 +4,6 @@ const TimelineModel = require('../models/TimelineModel');
 const { generateTimelineFromGemini } = require('../utils/gemini');
 const { fetchUnsplashImages } = require('../utils/unsplash');
 const { fetchWikipediaExtract } = require('../utils/wikipedia');
-const Search = require('../models/SearchModel');
 const { sortTimelineEvents, extractYear, filterTimelineEventsByYear } = require('../utils/timelineUtils');
 const fetch = require('node-fetch');
 
@@ -69,12 +68,9 @@ router.get('/search', async (req, res) => {
     }
 
     const { fullText, missing } = await fetchWikipediaExtract(query);
-    console.log("fullText:", fullText);
-    console.log("missing:", missing);
     let timelineEvents = [];
     let images = [];
     if (missing) {
-      console.log("term doesnt found");
       return res.json({
         extract: fullText,
         timelineEvents: [],

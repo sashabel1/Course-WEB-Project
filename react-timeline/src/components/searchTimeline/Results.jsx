@@ -38,26 +38,40 @@ export default function Results({
 
       <div className="flex-1 min-w-0">
         {fullText ? (
-          <div className="w-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-[0_10px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_15px_rgba(0,0,0,0.3)] border border-gray-200 dark:border-gray-700 box-border">
-            <h2 className="text-[2rem] font-bold text-[#006A71] dark:text-gray-100 mb-4 text-center">
+          <div className="
+            w-full p-6 rounded-lg 
+            bg-white dark:bg-gray-800 
+            shadow-md dark:shadow-[0_8px_16px_rgba(0,106,113,0.2)] 
+            border border-gray-300 dark:border-[#006A71] 
+            box-border
+          ">
+            <h2 className="text-[2rem] font-bold text-[#006A71] dark:text-[#3dd6f3] mb-4 text-center">
               {`Results for "${query}"`}
               {(startYear || endYear) && (
                 <> from: {startYear || '1900'} to: {endYear || '2024'}</>
               )}
             </h2>
 
-            <details className="my-4 border border-gray-300 dark:border-gray-600 rounded-lg p-2 bg-[#f9f9f9] dark:bg-gray-700">
-              <summary className="cursor-pointer font-bold text-[#0077cc] dark:text-blue-400 hover:underline">
+            <details className="
+              my-4 border border-[#006A71] dark:border-[#3dd6f3] rounded-lg p-2 
+              bg-[#F2EFE7] dark:bg-[#004a4f]
+            ">
+              <summary className="
+                cursor-pointer font-bold text-[#006A71] dark:text-[#3dd6f3] hover:underline
+              ">
                 Show Wikipedia summary
               </summary>
-              <p className="mt-2 leading-6 whitespace-pre-wrap text-gray-700 dark:text-gray-300 max-h-[240px] overflow-y-auto border border-gray-300 dark:border-gray-600 p-3 rounded bg-[#f9fafb] dark:bg-gray-800">
+              <p className="
+                mt-2 leading-6 whitespace-pre-wrap text-gray-800 dark:text-gray-300 max-h-[240px] overflow-y-auto 
+                border border-[#006A71] dark:border-[#3dd6f3] p-3 rounded bg-white dark:bg-[#003739]
+              ">
                 {fullText}
               </p>
             </details>
 
             {timelineEvents.length > 0 ? (
               <div className="relative px-[50px] py-5">
-                <div className="absolute top-0 bottom-0 left-1/2 w-1 bg-[#006A71] dark:bg-blue-600 -translate-x-1/2 z-0" />
+                <div className="absolute top-0 bottom-0 left-1/2 w-1 bg-[#006A71] dark:bg-[#3dd6f3] -translate-x-1/2 z-0" />
                 {timelineEvents.map((event, index) => (
                   <TimelineEvent
                     key={index}

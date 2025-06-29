@@ -34,35 +34,48 @@ const TimelineEditor = ({
       onSubmit={onAddEvent}
       timelineName={selectedTimeline.title}
       onTimelineNameChange={onEditTimelineName}
-      isEditing={false}
+      isEditing={true}
     />
     <div className="w-full flex justify-center gap-4 mt-4">
-      <button
-        type="submit"
-        onClick={onSave}
-        className="px-4 py-2 bg-[#006A71] dark:bg-blue-600 text-white rounded font-semibold hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md transition"
-      >
-        Save Changes
-      </button>
-      <button
-        type="button"
-        onClick={onCancel}
-        className="px-4 py-2 bg-[#006A71] dark:bg-blue-600 text-white rounded font-semibold hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md transition"
-      >
-        Cancel
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          if (window.confirm("Are you sure you want to delete this timeline?")) {
-            onDelete();
-          }
-        }}
-        className="px-4 py-2 bg-red-600 dark:bg-red-700 text-white rounded font-semibold hover:bg-red-700 dark:hover:bg-red-800 hover:-translate-y-0.5 hover:shadow-md transition"
-      >
-        Delete
-      </button>
-    </div>
+  <button
+    type="submit"
+    onClick={onSave}
+    className="
+    px-5 py-2 rounded font-semibold text-base cursor-pointer transition-all duration-300
+    bg-[#006A71] text-white
+    dark:bg-[#3dd6f3] dark:text-gray-900
+    hover:bg-[#6db3b7] dark:hover:bg-[#0f7389]"
+    >
+    Save Changes
+  </button>
+  <button
+    type="button"
+    onClick={onCancel}
+    className="
+    px-5 py-2 rounded font-semibold text-base cursor-pointer transition-all duration-300
+    bg-[#006A71] text-white
+    dark:bg-[#3dd6f3] dark:text-gray-900
+    hover:bg-[#6db3b7] dark:hover:bg-[#0f7389]"
+    >
+    Cancel
+  </button>
+  <button
+    type="button"
+    onClick={() => {
+      if (window.confirm("Are you sure you want to delete this timeline?")) {
+        onDelete();
+      }
+    }}
+    className="
+      px-4 py-2 rounded font-semibold text-white
+      bg-red-600 hover:bg-red-700
+      dark:bg-red-700 dark:hover:bg-red-800
+      transition transform hover:-translate-y-0.5 hover:shadow-md
+    "
+  >
+    Delete
+  </button>
+</div>
   </>
 );
 

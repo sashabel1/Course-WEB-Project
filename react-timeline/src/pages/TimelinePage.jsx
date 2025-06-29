@@ -111,42 +111,42 @@ const TimelinePage = () => {
 
   
   return (
-    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7]">
-      <Header />
-      <div className="w-full flex-1 px-4 mt-8">
-        <h1 className="text-5xl font-extrabold text-[#006A71] mb-8 text-center drop-shadow-md">
-          {topic} Timeline
-        </h1>
+  <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
+    <Header />
+    <div className="w-full flex-1 px-4 mt-8">
+      <h1 className="text-5xl font-extrabold text-[#006A71] dark:text-[#3dd6f3] mb-8 text-center drop-shadow-md transition-colors duration-300">
+        {topic} Timeline
+      </h1>
 
-        <Controls
-          sortOrder={sortOrder}
-          onSort={handleSort}
-          color={color}
-          onColorChange={handleColorChange}
-        />
+      <Controls
+        sortOrder={sortOrder}
+        onSort={handleSort}
+        color={color}
+        onColorChange={handleColorChange}
+      />
 
-        {loading ? (
-          <div className="text-center">Loading...</div>
-        ) : (
-          <div className="flex overflow-x-auto py-4 px-4 gap-4 scroll-smooth">
-            {sortedTimeline.map((event, idx) => (
-              <EventCard
-                key={idx}
-                event={event}
-                onClick={() => setSelectedEvent(event)}
-                borderColor={color}
-              />
-            ))}
-          </div>
-        )}
+      {loading ? (
+        <div className="text-center text-gray-700 dark:text-gray-300">Loading...</div>
+      ) : (
+        <div className="flex overflow-x-auto py-4 px-4 gap-4 scroll-smooth">
+          {sortedTimeline.map((event, idx) => (
+            <EventCard
+              key={idx}
+              event={event}
+              onClick={() => setSelectedEvent(event)}
+              borderColor={color}
+            />
+          ))}
+        </div>
+      )}
 
-        {selectedEvent && (
-          <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-        )}
-      </div>
-      <Footer />
+      {selectedEvent && (
+        <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+      )}
     </div>
-  );
+    <Footer />
+  </div>
+);
 };
 
 export default TimelinePage;

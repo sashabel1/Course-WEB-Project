@@ -98,7 +98,9 @@ const Search = () => {
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
       <div className="flex flex-col items-center w-full m-5 flex-1">
-        <h1 className="text-4xl font-bold text-[#006A71] dark:text-gray-100 text-center mb-6">Timeline Search</h1>
+        <h1 className="text-4xl font-bold text-[#006A71] dark:text-[#3dd6f3] text-center mb-6">
+          Timeline Search
+        </h1>
         <SearchBar
           onSearch={handleSearch}
           initialQuery={query}

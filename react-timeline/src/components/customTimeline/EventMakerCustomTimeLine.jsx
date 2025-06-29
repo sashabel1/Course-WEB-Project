@@ -18,54 +18,56 @@ import React from 'react';
 const EventForm = ({ eventData, onChange, onSubmit, timelineName, onTimelineNameChange, isEditing }) => (
   <form 
     onSubmit={onSubmit} 
-    className="flex flex-col gap-4 mb-6"
+    className="flex flex-col gap-2 mb-8 w-full max-w-xl"
   >
+    {typeof timelineName !== 'undefined' && (
+    <>
     <input
       type="text"
-      name="timelineName"
       value={timelineName}
       onChange={onTimelineNameChange}
-      placeholder="Timeline Name"
-      required
-      className={isEditing ? '' : 'outline-none border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded px-3 py-2 text-base'}
-      style={isEditing ? { display: 'none' } : {}}
-    />
-
-    <input
-      type="text"
-      name="date"
-      value={eventData.date}
-      onChange={onChange}
-      placeholder="Date (e.g., 1969)"
-      required
-      className="px-3 py-2 text-base border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-[#006A71] dark:focus:ring-blue-600"
-    />
-
+      placeholder="Timeline name"
+      required={!isEditing}
+      className="px-3 py-2 text-base border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#006A71]"
+      />
+      </>
+    )}
     <input
       type="text"
       name="title"
+      placeholder="Title"
       value={eventData.title}
       onChange={onChange}
-      placeholder="Event Title"
       required
-      className="px-3 py-2 text-base border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-[#006A71] dark:focus:ring-blue-600"
+      className="px-3 py-2 text-base border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#006A71]"
+    />
+
+    <input
+      type="date"
+      name="date"
+      value={eventData.date}
+      onChange={onChange}
+      required
+      className="px-3 py-2 text-base border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#006A71]"
     />
 
     <textarea
       name="description"
+      placeholder="Description"
       value={eventData.description}
       onChange={onChange}
-      placeholder="Event Description"
-      rows="3"
-      className="px-3 py-2 text-base border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#006A71] dark:focus:ring-blue-600"
+      className="px-3 py-2 text-base border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#006A71]"
     />
 
     <button
       type="submit"
-      className="py-2.5 px-5 bg-[#006A71] dark:bg-blue-600 text-white rounded-md font-semibold text-base cursor-pointer border-0
-                 transition-transform duration-300 hover:bg-[#10b2bd] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-[0_4px_8px_rgba(0,106,113,0.3)]"
-    >
-      {isEditing ? 'Update Event' : 'Add Event'}
+      className="
+            px-5 py-2 rounded font-semibold text-base cursor-pointer transition-all duration-300
+            bg-[#006A71] text-white
+            dark:bg-[#3dd6f3] dark:text-gray-900
+            hover:bg-[#6db3b7] dark:hover:bg-[#0f7389]"
+            >
+      Add Event
     </button>
   </form>
 );

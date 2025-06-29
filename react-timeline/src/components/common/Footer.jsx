@@ -1,8 +1,7 @@
-import '../../style/componentsStyle/Footer.css';
-
 function Footer() {
   return (
-    <footer className="footer">
+    <footer
+      className="w-full bg-[#004f53] text-[#F2EFE7] dark:bg-gray-700 dark:text-gray-200 py-4 text-center text-base font-normal mt-0 select-none shadow-inner transition-colors duration-300">
       &copy; 2025 Timeline History Website. All rights reserved.
     </footer>
   );

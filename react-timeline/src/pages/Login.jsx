@@ -66,14 +66,19 @@ const Login = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 overflow-x-auto transition-colors duration-300">
+    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300 overflow-x-auto">
       <Header />
 
-      <div className="flex-1 max-w-md w-full m-8 p-8 rounded-xl bg-white dark:bg-gray-800 shadow-[0_8px_16px_rgba(0,106,113,0.2)] dark:shadow-[0_8px_16px_rgba(0,0,0,0.3)]">
-        <h2 className="text-[#006A71] dark:text-gray-100 text-center text-2xl font-semibold mb-8">Login to Your Account</h2>
+      <div className="flex-1 max-w-md w-full m-8 p-8 rounded-xl 
+          bg-white dark:bg-gray-800 
+          shadow-[0_8px_16px_rgba(0,106,113,0.2)] dark:shadow-none
+          ">
+        <h2 className="text-[#006A71] dark:text-[#3dd6f3] text-center text-2xl font-semibold mb-8">
+          Login to Your Account
+        </h2>
 
         {error && (
-          <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 p-4 rounded mb-4 text-center font-medium">
+          <div className="bg-red-100 text-red-700 p-4 rounded mb-4 text-center font-medium">
             {error}
           </div>
         )}
@@ -88,7 +93,7 @@ const Login = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md text-base transition-colors focus:outline-none focus:border-[#48A6A7] dark:focus:border-blue-400 focus:ring-2 focus:ring-[#48A6A7] dark:focus:ring-blue-400"
+              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#006A71]"
             />
           </div>
 
@@ -101,29 +106,34 @@ const Login = () => {
               value={formData.password}
               onChange={handleInputChange}
               required
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md text-base transition-colors focus:outline-none focus:border-[#48A6A7] dark:focus:border-blue-400 focus:ring-2 focus:ring-[#48A6A7] dark:focus:ring-blue-400"
+              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#006A71]"
             />
           </div>
-
           <button
             id="btnLogin"
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#2196F3] dark:bg-blue-600 text-white font-bold text-lg py-2.5 px-5 rounded-md cursor-pointer
-                       transition-all duration-300 hover:bg-[#1976D2] dark:hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg
-                       disabled:opacity-60 disabled:cursor-not-allowed"
+            className={`
+              w-full font-bold text-lg py-2.5 px-5 rounded-md cursor-pointer
+              transition-transform duration-300
+              ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}
+              bg-[#006A71] text-white
+              dark:bg-[#3dd6f3] dark:text-gray-900
+              hover:bg-[#10b2bd] dark:hover:bg-[#0f7389]
+              hover:-translate-y-0.5 hover:shadow-[0_4px_8px_rgba(0,106,113,0.3)]
+            `}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
-          </button>
+          {isLoading ? 'Logging in...' : 'Log In'}
+        </button>
         </form>
 
-        <p className="text-center mt-6 text-[#006A71] dark:text-gray-300">
+        <p className="text-center mt-6 text-[#006A71] dark:text-[#3dd6f3]">
           Don't have an account?{' '}
           <span
             onClick={() => navigate('/register')}
-            className="text-[#004a4f] dark:text-blue-400 underline font-bold cursor-pointer hover:text-[#006A71] dark:hover:text-blue-300"
+            className="text-[#004a4f] underline font-bold cursor-pointer hover:text-[#006A71] dark:text-[#66c9f4] dark:hover:text-[#3dd6f3]"
           >
-            Register
+            Register here
           </span>
         </p>
       </div>

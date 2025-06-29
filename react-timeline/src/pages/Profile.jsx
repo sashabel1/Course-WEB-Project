@@ -57,70 +57,54 @@ const Profile = () => {
     navigate(`/search?query=${encodeURIComponent(term)}`);
   };
 
-  if (!userEmail) {
-    return (
-      <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
-        <Header />
-        <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-12">
-          <div className="text-center bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 p-4 rounded-md">
-            <p>Please log in to view your profile.</p>
-            <button
-              onClick={() => navigate('/login')}
-              className="block mx-auto mt-4 bg-[#006A71] dark:bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-[#10b2bd] dark:hover:bg-blue-700 transition"
-            >
-              Go to Login
-            </button>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
-      <Header />
-      <div className="flex-1 w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-12 mb-12">
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-[#006A71] dark:text-gray-100 drop-shadow">My Profile</h2>
-        </div>
-
-        {success && (
-          <div className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-center p-3 rounded-md mb-4">
-            {success}
-          </div>
-        )}
-        {error && (
-          <div className="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-center p-3 rounded-md mb-4">
-            {error}
-          </div>
-        )}
-
-        {isEditing ? (
-          <ProfileForm
-            formData={formData}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-            cancelEdit={cancelEdit}
-          />
-        ) : (
-          <ProfileView
-            email={userEmail}
-            onEdit={() => setIsEditing(true)}
-            onReturn={() => navigate('/choose')}
-          />
-        )}
-
-        <SearchHistory
-          searches={searches}
-          loading={searchesLoading}
-          error={searchesError}
-          onSelect={handleHistorySelect}
-        />
+  <div className="min-h-screen flex flex-col justify-between items-center bg-[#F2EFE7]  dark:bg-gray-900 transition-colors duration-300 overflow-x-auto">
+    <Header />
+    <div className="flex-1 max-w-md w-full m-8 p-8 rounded-xl 
+          bg-white dark:bg-gray-800 
+          shadow-[0_8px_16px_rgba(0,106,113,0.2)] dark:shadow-none
+          ">
+      <div className="text-center mb-6">
+        <h2 className="text-[#006A71] dark:text-[#3dd6f3] text-center text-2xl font-semibold mb-8">My Profile</h2>
       </div>
-      <Footer />
+
+      {success && (
+        <div className="bg-green-100 text-green-800 text-center p-3 rounded-md mb-4">
+          {success}
+        </div>
+      )}
+      {error && (
+        <div className="bg-red-100 text-red-800 text-center p-3 rounded-md mb-4">
+          {error}
+        </div>
+      )}
+
+      {isEditing ? (
+        <ProfileForm
+          formData={formData}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          cancelEdit={cancelEdit}
+        />
+      ) : (
+        <ProfileView
+          email={userEmail}
+          onEdit={() => setIsEditing(true)}
+          onReturn={() => navigate('/choose')}
+        />
+      )}
+
+      <SearchHistory
+        searches={searches}
+        loading={searchesLoading}
+        error={searchesError}
+        onSelect={handleHistorySelect}
+      />
     </div>
-  );
+    <Footer />
+  </div>
+);
+
 };
 
 export default Profile;
