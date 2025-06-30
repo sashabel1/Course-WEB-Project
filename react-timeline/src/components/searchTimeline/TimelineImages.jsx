@@ -10,6 +10,7 @@ import React from 'react';
  * - Returns null if no images are provided or the array is empty
  * - Displays images in a responsive grid with consistent aspect ratio (3:2)
  * - Each image is centered, cropped, and fills its container
+ * - Fully responsive design for all device sizes
  */
 
 
@@ -17,7 +18,7 @@ const TimelineImages = ({ images }) => {
   if (!images || images.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[60px] p-5 mt-5 rounded-lg bg-transparent">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4 md:gap-[60px] p-2 sm:p-3 md:p-5 mt-2 sm:mt-3 md:mt-5 rounded-lg bg-transparent">
       {images.map((image, index) => (
         <div
           key={index}

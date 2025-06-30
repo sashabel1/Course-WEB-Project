@@ -18,6 +18,7 @@ import Footer from "../components/common/Footer";
  * - Randomly positions bubbles on the page with animated appearance delays
  * - Saves the selected topic and type to localStorage upon bubble click
  * - Navigates the user to the timeline page after topic selection
+ * - Fully responsive design for all device sizes
  *
  * Hooks used:
  * - useState: Manages the current filter type state
@@ -77,7 +78,7 @@ const BubblePage = () => {
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
 
-      <div className="flex justify-center my-5 gap-2 flex-wrap">
+      <div className="flex justify-center my-3 sm:my-4 md:my-5 gap-1 sm:gap-2 flex-wrap px-2 sm:px-4">
         {FILTER_OPTIONS.map((type) => {
           const isActive = filterType === type;
           return (
@@ -86,7 +87,7 @@ const BubblePage = () => {
               type="button"
               onClick={() => setFilterType(type)}
               className={`
-                px-5 py-2 rounded-md font-semibold text-base cursor-pointer transition-all duration-300
+                px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 rounded-md font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300
                 border-2
                 ${isActive 
                   ? 'bg-[#006A71] text-white dark:bg-[#3dd6f3] dark:text-black border-[#006A71] dark:border-[#3dd6f3]'
@@ -100,7 +101,7 @@ const BubblePage = () => {
           );
         })}
       </div>
-      <div className="relative w-full h-screen mx-auto rounded-2xl p-8 flex-1 bg-[#F2EFE7] dark:bg-gray-800 transition-colors duration-300">
+      <div className="relative w-full h-screen mx-auto rounded-2xl p-2 sm:p-4 md:p-8 flex-1 bg-[#F2EFE7] dark:bg-gray-800 transition-colors duration-300">
         {filteredTopics.map((topic, idx) => {
           const { x, y, delay } = generateRandomPosition();
 
@@ -108,7 +109,7 @@ const BubblePage = () => {
             <button
               key={idx}
               type="button"
-              className="absolute w-20 h-20 rounded-full p-0 flex items-center justify-center shadow-md transition-transform duration-300 ease-in-out animate-float hover:scale-110"
+              className="absolute w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full p-0 flex items-center justify-center shadow-md transition-transform duration-300 ease-in-out animate-float hover:scale-110"
               data-x={x}
               data-y={y}
               data-delay={delay}

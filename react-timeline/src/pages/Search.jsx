@@ -21,6 +21,7 @@ import useTimelineSearch from '../hooks/useTimelineSearch';
  * - Displays full text, events, and images related to the query
  * - Saves new searches to the user's history
  * - Distributes images between left/right sides for visual layout
+ * - Fully responsive design for all device sizes
  *
  * Hooks:
  * - useState: Manage UI state like query, filters, results, loading, error
@@ -97,29 +98,31 @@ const Search = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
-      <div className="flex flex-col items-center w-full m-5 flex-1">
-        <h1 className="text-4xl font-bold text-[#006A71] dark:text-[#3dd6f3] text-center mb-6">
+      <div className="flex flex-col items-center w-full px-4 sm:px-6 lg:px-8 m-2 sm:m-3 md:m-5 flex-1">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#006A71] dark:text-[#3dd6f3] text-center mb-4 sm:mb-6">
           Timeline Search
         </h1>
-        <SearchBar
-          onSearch={handleSearch}
-          initialQuery={query}
-          initialStartYear={startYear}
-          initialEndYear={endYear}
-        />
-        {loading && query && <Loading query={query} />}
-        {error && <ErrorBox error={error} />}
-        {!loading && !error && query && (
-          <Results
-            query={query}
-            startYear={startYear}
-            endYear={endYear}
-            fullText={fullText}
-            timelineEvents={timelineEvents}
-            images={images}
-            getSideImages={getSideImages}
+        <div className="w-full max-w-4xl">
+          <SearchBar
+            onSearch={handleSearch}
+            initialQuery={query}
+            initialStartYear={startYear}
+            initialEndYear={endYear}
           />
-        )}
+          {loading && query && <Loading query={query} />}
+          {error && <ErrorBox error={error} />}
+          {!loading && !error && query && (
+            <Results
+              query={query}
+              startYear={startYear}
+              endYear={endYear}
+              fullText={fullText}
+              timelineEvents={timelineEvents}
+              images={images}
+              getSideImages={getSideImages}
+            />
+          )}
+        </div>
       </div>
       <Footer />
     </div>

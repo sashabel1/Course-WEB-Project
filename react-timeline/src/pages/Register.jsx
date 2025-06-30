@@ -13,6 +13,7 @@ import Footer from '../components/common/Footer';
  * - Input validation to ensure passwords match before submitting
  * - Displays success and error messages
  * - Navigates to login page after successful registration with a delay
+ * - Fully responsive design for all device sizes
  *
  * Hooks used:
  * - useState: Manages form input values, error, and success states
@@ -77,26 +78,26 @@ const Register = () => {
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 overflow-x-auto transition-colors duration-300">
       <Header />
 
-      <div className="flex-1 max-w-md w-full m-8 p-8 rounded-xl bg-white dark:bg-gray-800 shadow-[0_8px_16px_rgba(0,106,113,0.2)] dark:shadow-none transition-colors duration-300">
-        <h2 className="text-[#006A71] dark:text-[#3dd6f3] text-center text-2xl font-semibold mb-8">
+      <div className="flex-1 max-w-sm sm:max-w-md w-full m-4 sm:m-6 md:m-8 p-4 sm:p-6 md:p-8 rounded-xl bg-white dark:bg-gray-800 shadow-[0_8px_16px_rgba(0,106,113,0.2)] dark:shadow-none transition-colors duration-300">
+        <h2 className="text-[#006A71] dark:text-[#3dd6f3] text-center text-xl sm:text-2xl font-semibold mb-6 sm:mb-8">
           Create an Account
         </h2>
 
         {error && (
-          <div className="bg-red-100 dark:bg-red-700 text-red-700 dark:text-red-200 p-4 rounded mb-4 text-center font-medium transition-colors duration-300">
+          <div className="bg-red-100 dark:bg-red-700 text-red-700 dark:text-red-200 p-3 sm:p-4 rounded mb-4 text-center font-medium transition-colors duration-300 text-sm sm:text-base">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="bg-green-100 dark:bg-green-700 text-green-700 dark:text-green-200 p-4 rounded mb-4 text-center font-medium transition-colors duration-300">
+          <div className="bg-green-100 dark:bg-green-700 text-green-700 dark:text-green-200 p-3 sm:p-4 rounded mb-4 text-center font-medium transition-colors duration-300 text-sm sm:text-base">
             Registration successful! Redirecting to login...
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           <div className="flex flex-col">
-            <label htmlFor="email" className="mb-1 font-medium text-gray-700 dark:text-gray-300">
+            <label htmlFor="email" className="mb-1 font-medium text-gray-700 dark:text-gray-300 text-sm sm:text-base">
               Email:
             </label>
             <input
@@ -106,12 +107,12 @@ const Register = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#006A71] transition-colors duration-300"
+              className="border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#006A71] transition-colors duration-300 text-sm sm:text-base"
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="password" className="mb-1 font-medium text-gray-700 dark:text-gray-300">
+            <label htmlFor="password" className="mb-1 font-medium text-gray-700 dark:text-gray-300 text-sm sm:text-base">
               Password:
             </label>
             <input
@@ -121,12 +122,12 @@ const Register = () => {
               value={formData.password}
               onChange={handleInputChange}
               required
-              className="border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#006A71] transition-colors duration-300"
+              className="border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#006A71] transition-colors duration-300 text-sm sm:text-base"
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="confirmPassword" className="mb-1 font-medium text-gray-700 dark:text-gray-300">
+            <label htmlFor="confirmPassword" className="mb-1 font-medium text-gray-700 dark:text-gray-300 text-sm sm:text-base">
               Confirm Password:
             </label>
             <input
@@ -136,14 +137,14 @@ const Register = () => {
               value={formData.confirmPassword}
               onChange={handleInputChange}
               required
-              className="border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#006A71] transition-colors duration-300"
+              className="border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#006A71] transition-colors duration-300 text-sm sm:text-base"
             />
           </div>
 
           <button
             id="btnRegister"
             type="submit"
-            className="w-full bg-[#006A71] dark:bg-[#3dd6f3] text-white dark:text-gray-900 font-bold text-lg py-2.5 px-5 rounded-md cursor-pointer
+            className="w-full bg-[#006A71] dark:bg-[#3dd6f3] text-white dark:text-gray-900 font-bold text-base sm:text-lg py-2 sm:py-2.5 px-4 sm:px-5 rounded-md cursor-pointer
                        transition-transform duration-300 hover:bg-[#10b2bd] dark:hover:bg-[#0f7389]
                        hover:-translate-y-0.5 hover:shadow-[0_4px_8px_rgba(0,106,113,0.3)]"
           >
@@ -151,7 +152,7 @@ const Register = () => {
           </button>
         </form>
 
-        <p className="text-center mt-6 text-[#006A71] dark:text-[#3dd6f3] transition-colors duration-300">
+        <p className="text-center mt-4 sm:mt-6 text-[#006A71] dark:text-[#3dd6f3] transition-colors duration-300 text-sm sm:text-base">
           Already have an account?{' '}
           <span
             onClick={() => navigate('/login')}

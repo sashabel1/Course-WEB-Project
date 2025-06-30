@@ -13,6 +13,7 @@ import Footer from '../components/common/Footer';
  * Features:
  * - Displays error messages on failed login or server connection issues
  * - Navigates to registration page via a clickable link for new users
+ * - Fully responsive design for all device sizes
  *
  * Hooks used:
  * - useState: Manages form inputs, loading state, and error messages
@@ -69,23 +70,23 @@ const Login = () => {
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300 overflow-x-auto">
       <Header />
 
-      <div className="flex-1 max-w-md w-full m-8 p-8 rounded-xl 
+      <div className="flex-1 max-w-sm sm:max-w-md w-full m-4 sm:m-6 md:m-8 p-4 sm:p-6 md:p-8 rounded-xl 
           bg-white dark:bg-gray-800 
           shadow-[0_8px_16px_rgba(0,106,113,0.2)] dark:shadow-none
           ">
-        <h2 className="text-[#006A71] dark:text-[#3dd6f3] text-center text-2xl font-semibold mb-8">
+        <h2 className="text-[#006A71] dark:text-[#3dd6f3] text-center text-xl sm:text-2xl font-semibold mb-6 sm:mb-8">
           Login to Your Account
         </h2>
 
         {error && (
-          <div className="bg-red-100 text-red-700 p-4 rounded mb-4 text-center font-medium">
+          <div className="bg-red-100 text-red-700 p-3 sm:p-4 rounded mb-4 text-center font-medium text-sm sm:text-base">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           <div className="flex flex-col">
-            <label htmlFor="email" className="mb-1 font-medium text-gray-700 dark:text-gray-300">Email:</label>
+            <label htmlFor="email" className="mb-1 font-medium text-gray-700 dark:text-gray-300 text-sm sm:text-base">Email:</label>
             <input
               type="email"
               id="email"
@@ -93,12 +94,12 @@ const Login = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#006A71]"
+              className="border border-gray-300 rounded px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#006A71]"
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="password" className="mb-1 font-medium text-gray-700 dark:text-gray-300">Password:</label>
+            <label htmlFor="password" className="mb-1 font-medium text-gray-700 dark:text-gray-300 text-sm sm:text-base">Password:</label>
             <input
               type="password"
               id="password"
@@ -106,7 +107,7 @@ const Login = () => {
               value={formData.password}
               onChange={handleInputChange}
               required
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#006A71]"
+              className="border border-gray-300 rounded px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#006A71]"
             />
           </div>
           <button
@@ -114,7 +115,7 @@ const Login = () => {
             type="submit"
             disabled={isLoading}
             className={`
-              w-full font-bold text-lg py-2.5 px-5 rounded-md cursor-pointer
+              w-full font-bold text-base sm:text-lg py-2 sm:py-2.5 px-4 sm:px-5 rounded-md cursor-pointer
               transition-transform duration-300
               ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}
               bg-[#006A71] text-white
@@ -127,7 +128,7 @@ const Login = () => {
         </button>
         </form>
 
-        <p className="text-center mt-6 text-[#006A71] dark:text-[#3dd6f3]">
+        <p className="text-center mt-4 sm:mt-6 text-[#006A71] dark:text-[#3dd6f3] text-sm sm:text-base">
           Don't have an account?{' '}
           <span
             onClick={() => navigate('/register')}

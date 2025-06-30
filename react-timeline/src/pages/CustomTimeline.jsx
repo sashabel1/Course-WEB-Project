@@ -18,6 +18,7 @@ import NewTimelineEditor from '../components/customTimeline/NewCustomTimelineEdi
  * - Allows selection and editing of an existing timeline
  * - Enables creation of a new timeline with multiple events
  * - Uses localStorage to identify the logged-in user by email
+ * - Fully responsive design for all device sizes
  *
  * Hooks used:
  * - useState: Manages local component state (timelines, events, selected timeline, etc.)
@@ -166,13 +167,13 @@ const CustomTimeline = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
-      <div className="max-w-3xl w-full mx-auto px-5 py-8 flex-1">
-        <h2 className="text-5xl font-extrabold text-[#006A71] dark:text-[#3dd6f3] mb-8 text-center drop-shadow-md">
+      <div className="max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl w-full mx-auto px-3 sm:px-4 md:px-5 py-4 sm:py-6 md:py-8 flex-1">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#006A71] dark:text-[#3dd6f3] mb-4 sm:mb-6 md:mb-8 text-center drop-shadow-md">
           Build Your Own Timeline
         </h2>
         <TimelineList timelines={timelines} onSelect={setSelectedTimeline} />
 
-        <div className="mt-6">
+        <div className="mt-4 sm:mt-6">
           {selectedTimeline ? (
             <TimelineEditor
               selectedTimeline={selectedTimeline}

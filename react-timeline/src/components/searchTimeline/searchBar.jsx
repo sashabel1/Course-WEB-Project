@@ -14,6 +14,7 @@ import useSearchHistory from '../../hooks/useSearchHistory';
  * - Shows suggestions dropdown; clicking a suggestion triggers search
  * - Allows optional input of start and end year filters
  * - Handles form submission via Enter key or Search button
+ * - Fully responsive design for all device sizes
  */
 
 function SearchBar({ onSearch }) {
@@ -68,7 +69,7 @@ function SearchBar({ onSearch }) {
 
   return (
     <div className="w-full max-w-[800px] mx-auto">
-      <form className="flex flex-col gap-[15px]" onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-3 sm:gap-4 md:gap-[15px]" onSubmit={handleSubmit}>
         <div className="relative w-full">
           <input
             type="text"
@@ -76,7 +77,7 @@ function SearchBar({ onSearch }) {
             onChange={handleInputChange}
             placeholder="Search for a topic..."
             autoComplete="off"
-            className="w-full p-2 text-[20px] border border-gray-300 rounded"
+            className="w-full p-2 sm:p-3 text-base sm:text-lg md:text-[20px] border border-gray-300 rounded"
           />
           {showSuggestions && suggestions.length > 0 && (
             <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-300 rounded z-50 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-gray-400">
@@ -84,7 +85,7 @@ function SearchBar({ onSearch }) {
                 {suggestions.map((suggestion, idx) => (
                   <span
                     key={idx}
-                    className="inline-block px-3 py-1 bg-gray-100 rounded-full cursor-pointer text-[18px] whitespace-nowrap hover:bg-gray-200"
+                    className="inline-block px-2 sm:px-3 py-1 bg-gray-100 rounded-full cursor-pointer text-sm sm:text-base md:text-[18px] whitespace-nowrap hover:bg-gray-200"
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
                     {suggestion}
@@ -95,27 +96,27 @@ function SearchBar({ onSearch }) {
           )}
         </div>
 
-        <div className="flex gap-[10px]">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-[10px]">
           <input
             type="text"
             value={startYear}
             onChange={e => setStartYear(e.target.value)}
             placeholder="Start Year"
-            className="flex-1 p-2 text-[18px] border border-gray-300 rounded"
+            className="flex-1 p-2 sm:p-3 text-base sm:text-lg md:text-[18px] border border-gray-300 rounded"
           />
           <input
             type="text"
             value={endYear}
             onChange={e => setEndYear(e.target.value)}
             placeholder="End Year"
-            className="flex-1 p-2 text-[18px] border border-gray-300 rounded"
+            className="flex-1 p-2 sm:p-3 text-base sm:text-lg md:text-[18px] border border-gray-300 rounded"
           />
         </div>
 
         <button
           type="submit"
           className="
-            px-5 py-2 text-white bg-[#006A71] rounded font-semibold text-base cursor-pointer 
+            px-4 sm:px-5 py-2 sm:py-3 text-white bg-[#006A71] rounded font-semibold text-sm sm:text-base cursor-pointer 
             transition
             hover:bg-[#10b2bd] hover:-translate-y-0.5 hover:shadow-md
             dark:bg-[#3dd6f3] dark:text-gray-900
