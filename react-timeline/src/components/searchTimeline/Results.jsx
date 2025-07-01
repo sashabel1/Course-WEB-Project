@@ -72,8 +72,8 @@ export default function Results({
             </details>
 
             {timelineEvents.length > 0 ? (
-              <div className="relative px-4 sm:px-8 md:px-[50px] py-3 sm:py-4 md:py-5">
-                <div className="absolute top-0 bottom-0 left-1/2 w-1 bg-[#006A71] dark:bg-[#3dd6f3] -translate-x-1/2 z-0" />
+              <div className="relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20">
+                <div className="absolute top-0 bottom-0 left-1/2 w-1 sm:w-1.5 md:w-2 lg:w-2.5 xl:w-3 bg-[#006A71] dark:bg-[#3dd6f3] -translate-x-1/2 z-0" />
                 {timelineEvents.map((event, index) => (
                   <TimelineEvent
                     key={index}
