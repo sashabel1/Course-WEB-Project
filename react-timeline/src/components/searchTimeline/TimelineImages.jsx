@@ -13,21 +13,20 @@ import React from 'react';
  * - Fully responsive design for all device sizes
  */
 
-
 const TimelineImages = ({ images }) => {
   if (!images || images.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4 md:gap-[60px] p-2 sm:p-3 md:p-5 mt-2 sm:mt-3 md:mt-5 rounded-lg bg-transparent">
+    <div className="grid grid-cols-1 gap-3 sm:gap-4 p-2 sm:p-3 rounded-lg bg-transparent">
       {images.map((image, index) => (
         <div
           key={index}
-          className="aspect-[3/2] flex flex-col items-center text-center rounded-lg overflow-hidden"
+          className="aspect-[3/2] flex flex-col items-center text-center rounded-lg overflow-hidden shadow-md"
         >
           <img
             src={image.src}
             alt={image.alt}
-            className="w-full aspect-[3/2] object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
       ))}
