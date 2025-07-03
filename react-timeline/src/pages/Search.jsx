@@ -99,29 +99,33 @@ const Search = () => {
     <div className="min-h-screen flex flex-col items-center bg-[#F2EFE7] dark:bg-gray-900 transition-colors duration-300">
       <Header />
       <div className="flex flex-col items-center w-full px-4 sm:px-6 lg:px-8 m-2 sm:m-3 md:m-5 flex-1">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#006A71] dark:text-[#3dd6f3] text-center mb-4 sm:mb-6">
-          Timeline Search
-        </h1>
-        <div className="w-full max-w-4xl">
-          <SearchBar
-            onSearch={handleSearch}
-            initialQuery={query}
-            initialStartYear={startYear}
-            initialEndYear={endYear}
-          />
-          {loading && query && <Loading query={query} />}
-          {error && <ErrorBox error={error} />}
-          {!loading && !error && query && (
-            <Results
-              query={query}
-              startYear={startYear}
-              endYear={endYear}
-              fullText={fullText}
-              timelineEvents={timelineEvents}
-              images={images}
-              getSideImages={getSideImages}
+        <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#006A71] dark:text-[#3dd6f3] text-center mb-4 sm:mb-6">
+            Timeline Search
+          </h1>
+          <div className="w-full max-w-4xl mx-auto">
+            <SearchBar
+              onSearch={handleSearch}
+              initialQuery={query}
+              initialStartYear={startYear}
+              initialEndYear={endYear}
             />
-          )}
+            {loading && query && <Loading query={query} />}
+            {error && <ErrorBox error={error} />}
+          </div>
+          <div className="w-full">
+            {!loading && !error && query && (
+              <Results
+                query={query}
+                startYear={startYear}
+                endYear={endYear}
+                fullText={fullText}
+                timelineEvents={timelineEvents}
+                images={images}
+                getSideImages={getSideImages}
+              />
+            )}
+          </div>
         </div>
       </div>
       <Footer />

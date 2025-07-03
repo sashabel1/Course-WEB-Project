@@ -35,14 +35,14 @@ export default function Results({
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
         {/* Left Images - Hidden on mobile, shown on larger screens */}
-        <div className="hidden lg:block lg:w-72 xl:w-80 flex-shrink-0">
+        <div className="hidden lg:block lg:w-72 xl:w-80 flex-shrink-0 lg:mr-12 xl:mr-20">
           <div className="sticky top-4">
             <TimelineImages images={getSideImages('left')} />
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 min-w-0">
+        <div className="mx-auto max-w-2xl w-full">
           {fullText ? (
             <div className="
               w-full p-4 sm:p-6 lg:p-8 rounded-lg 
@@ -75,7 +75,7 @@ export default function Results({
               </details>
 
               {timelineEvents.length > 0 ? (
-                <div className="relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20">
+                <div className="relative px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20 w-full">
                   <div className="absolute top-0 bottom-0 left-1/2 w-1 sm:w-1.5 md:w-2 lg:w-2.5 xl:w-3 bg-[#006A71] dark:bg-[#3dd6f3] -translate-x-1/2 z-0" />
                   {timelineEvents.map((event, index) => (
                     <TimelineEvent
@@ -111,7 +111,7 @@ export default function Results({
         </div>
 
         {/* Right Images - Hidden on mobile, shown on larger screens */}
-        <div className="hidden lg:block lg:w-72 xl:w-80 flex-shrink-0">
+        <div className="hidden lg:block lg:w-72 xl:w-80 flex-shrink-0 lg:ml-12 xl:ml-20">
           <div className="sticky top-4">
             <TimelineImages images={getSideImages('right')} />
           </div>
